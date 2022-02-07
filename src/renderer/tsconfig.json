@@ -15,7 +15,8 @@
   },
   "include": [
     "../renderer/**/*",
-    "../common/**/*"
+    "../common/**/*",
+    "typings"
   ],
   "exclude": [
     "../main/**/*"
