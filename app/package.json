@@ -4,6 +4,6 @@
   "license": "MIT",
   "main": "index.js",
   "devDependencies": {
-    "electron": "^11.3.0"
+    "electron": "^17.0.0"
   }
 }
