@@ -14,6 +14,7 @@ function createWindow() {
       nodeIntegration: false,
       contextIsolation: true,
       preload,
+      devTools: isDevelopment,
     },
     show: false,
   }).once('ready-to-show', () => {
