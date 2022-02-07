@@ -1,6 +1,8 @@
 appId: com.jctaoo.electron_starter
 productName: electron starter
 copyright: Copyright © 2021 jctaoo
+electronDownload:
+  mirror: https://registry.npmmirror.com/-/binary/electron/v
 directories:
   output: dist
   buildResources: build
