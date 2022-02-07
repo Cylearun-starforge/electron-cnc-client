@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
   const [count, setCount] = useState(0);
   useEffect(() => {
-    console.log(window.bridge.test('world'));
+    (async () => {
+      const config = window.bridge.readConfig();
+      console.log('config', config);
+    })();
   }, []);
   return (
     <div className='App'>

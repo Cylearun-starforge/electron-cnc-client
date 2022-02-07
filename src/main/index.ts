@@ -1,7 +1,6 @@
 import { app, BrowserWindow } from 'electron';
-import { add } from '@common/utils';
 import { join } from 'path';
-import { pathToFileURL, format as formatUrl } from 'url';
+import { pathToFileURL } from 'url';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 const preload = join(__dirname, 'preload.js');
