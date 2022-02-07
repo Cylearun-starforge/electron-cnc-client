@@ -1,6 +1,7 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import { join } from 'path';
 import { pathToFileURL } from 'url';
+import { ConfigStore } from '@main/config/store';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 const preload = join(__dirname, 'preload.js');
@@ -29,7 +30,11 @@ function createWindow() {
   }
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(createWindow).then(async () => {
+  ipcMain.on('config', (event) => {
+    event.returnValue = (ConfigStore.Instance.config);
+  });
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

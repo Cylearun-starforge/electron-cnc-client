@@ -5,10 +5,7 @@ import './App.css';
 function App() {
   const [count, setCount] = useState(0);
   useEffect(() => {
-    (async () => {
-      const config = window.bridge.readConfig();
-      console.log('config', config);
-    })();
+    console.log(window.bridge.dirname);
   }, []);
   return (
     <div className='App'>
