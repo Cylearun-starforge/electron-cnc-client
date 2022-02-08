@@ -1,6 +1,6 @@
 import { FC, ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
-
+const { callMain } = window.bridge;
 const Background = styled.img`
   width: 100vw;
   height: 100vh;
@@ -21,10 +21,10 @@ const toBase64 = async (buffer: Buffer) =>
   });
 
 const setLoadingScreenByConfig = async () => {
-  const config = await window.bridge.callMain('get-configuration');
-  const activeThemePath = config.constants.ThemeDir + '/' + (config.dynamic!.defaultTheme ?? '');
-  const bgPath = activeThemePath + '/loadingscreen.png';
-  const backgroundUrl = await window.bridge.callMain('request-local-file', bgPath).then(toBase64);
+  const config = await callMain('get-configuration');
+  const activeThemePath = await callMain('path-join', config.constants.ThemeDir, config.dynamic!.defaultTheme ?? '');
+  const bgPath = await callMain('path-join', activeThemePath, './loadingscreen.png');
+  const backgroundUrl = await callMain('request-local-file', bgPath).then(toBase64);
   let loadingNode: ReactNode;
   if (
     !config.dynamic ||
