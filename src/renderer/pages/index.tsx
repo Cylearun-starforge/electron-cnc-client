@@ -24,7 +24,10 @@ const setLoadingScreenByConfig = async () => {
   const config = await callMain('get-configuration');
   const activeThemePath = await callMain('path-join', config.constants.ThemeDir, config.dynamic!.defaultTheme ?? '');
   const bgPath = await callMain('path-join', activeThemePath, './loadingscreen.png');
-  const backgroundUrl = await callMain('request-local-file', bgPath).then(toBase64);
+  const backgroundUrl =
+    (await callMain('request-local-file', bgPath)
+      .then(toBase64)
+      .catch(() => {})) ?? '';
   let loadingNode: ReactNode;
   if (
     !config.dynamic ||
@@ -41,8 +44,9 @@ const setLoadingScreenByConfig = async () => {
   if (loading.image) {
     const loadingImageUrl = await window.bridge
       .callMain('request-local-file', activeThemePath + '/' + loading.image)
-      .then(toBase64);
-    loadingNode = <img src={loadingImageUrl} alt={loading.text ?? 'loading'} style={loading.style} />;
+      .then(toBase64)
+      .catch(() => {});
+    loadingNode = <img src={loadingImageUrl ?? ''} alt={loading.text ?? 'loading'} style={loading.style} />;
   } else {
     loadingNode = <div style={loading.style}>{loading.text}</div>;
   }
