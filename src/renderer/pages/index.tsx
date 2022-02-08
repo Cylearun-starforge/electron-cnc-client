@@ -1,12 +1,11 @@
 import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const Background = styled.div<{ backgroundImage: string }>`
-  background-image: url('${props => props.backgroundImage}');
-  background-position: center;
-  background-size: 100% 100%;
+const Background = styled.img`
   width: 100vw;
   height: 100vh;
+  position: absolute;
+  object-fic: cover;
 `;
 export const Index: FC = () => {
   const [bg, setBg] = useState('');
@@ -17,7 +16,7 @@ export const Index: FC = () => {
       const backgroundUrl =
         window.bridge.getConfigConstants().ThemeDir + '/' + config.defaultTheme + '/loadingscreen.png';
       window.bridge.requestLocalFile(backgroundUrl).then(data => {
-        console.log('first 40', data.slice(0, 40))
+        console.log('first 40', data.slice(0, 40));
         const blob = new Blob([data]);
         const reader = new FileReader();
         reader.readAsDataURL(blob);
@@ -27,5 +26,9 @@ export const Index: FC = () => {
       });
     });
   }, []);
-  return <Background backgroundImage={bg} />;
+  return (
+    <div>
+      <Background src={bg} alt='loading' />
+    </div>
+  );
 };
