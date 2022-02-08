@@ -22,7 +22,8 @@ const toBase64 = async (buffer: Buffer) =>
 
 const setLoadingScreenByConfig = async () => {
   const config = await window.bridge.callMain('get-configuration');
-  const bgPath = config.constants.ThemeDir + '/' + (config.dynamic!.defaultTheme ?? '') + '/loadingscreen.png';
+  const activeThemePath = config.constants.ThemeDir + '/' + (config.dynamic!.defaultTheme ?? '');
+  const bgPath = activeThemePath + '/loadingscreen.png';
   const backgroundUrl = await window.bridge.callMain('request-local-file', bgPath).then(toBase64);
   let loadingNode: ReactNode;
   if (
@@ -37,10 +38,13 @@ const setLoadingScreenByConfig = async () => {
   }
   const { loading } = config.dynamic;
 
-  if (loading.text) {
-    loadingNode = <div style={loading.style}>{loading.text}</div>;
+  if (loading.image) {
+    const loadingImageUrl = await window.bridge
+      .callMain('request-local-file', activeThemePath + '/' + loading.image)
+      .then(toBase64);
+    loadingNode = <img src={loadingImageUrl} alt={loading.text ?? 'loading'} style={loading.style} />;
   } else {
-    loadingNode = <img src={loading.image} alt={loading.text ?? 'loading'} style={loading.style} />;
+    loadingNode = <div style={loading.style}>{loading.text}</div>;
   }
   return {
     backgroundUrl,
