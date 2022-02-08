@@ -21,14 +21,14 @@ export class ConfigWatcher {
     this.#handleChange();
   }
 
-  async #handleChange() {
+  #handleChange = async () => {
     for await (const change of this.#changeInfos) {
       const handler = ConfigWatcher.#watchHandlers.get(change.filename);
       if (handler) {
         handler(change);
       }
     }
-  }
+  };
 
   public addWatchHandler(filename: string, handler: WatchHandler) {
     ConfigWatcher.#watchHandlers.set(filename, handler);
