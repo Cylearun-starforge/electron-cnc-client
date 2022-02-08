@@ -12,11 +12,9 @@ export const Index: FC = () => {
 
   useEffect(() => {
     window.bridge.onConfigChange(async config => {
-      console.log(config);
-      const backgroundUrl =
-        window.bridge.getConfigConstants().ThemeDir + '/' + config.defaultTheme + '/loadingscreen.png';
-      window.bridge.requestLocalFile(backgroundUrl).then(data => {
-        console.log('first 40', data.slice(0, 40));
+      const allConfig = await window.bridge.callMain('get-configuration');
+      const backgroundUrl = allConfig.constants.ThemeDir + '/' + config.defaultTheme + '/loadingscreen.png';
+      window.bridge.callMain('request-local-file', backgroundUrl).then(data => {
         const blob = new Blob([data]);
         const reader = new FileReader();
         reader.readAsDataURL(blob);

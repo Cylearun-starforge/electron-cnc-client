@@ -1,28 +1,25 @@
 import { contextBridge, ipcRenderer } from 'electron';
-// import * as fs from 'fs/promises';
-import type { ConfigConstType } from '@main/config/const';
 
-const getConfigConstants = () => {
-  return ipcRenderer.sendSync('ConfigConst') as ConfigConstType;
+type IpcInvocable = typeof import('@main/ipc-invokes').Invocable;
+type RemoveFirst<T extends any[]> = T extends [first: infer First, ...rest: infer Rest] ? Rest : [];
+type InvocableHelper = {
+  [key in keyof IpcInvocable]: {
+    param: RemoveFirst<Parameters<IpcInvocable[key]>>;
+    return: ReturnType<IpcInvocable[key]>;
+  };
 };
+const callMain = <Channel extends keyof InvocableHelper = keyof InvocableHelper>(
+  channel: Channel,
+  ...args: InvocableHelper[Channel]['param']
+): InvocableHelper[Channel]['return'] => ipcRenderer.invoke(channel, ...args);
 
 export const BridgeApi = {
   dirname: __dirname,
-  // read: (filename: string) => fs.readFile(filename),
-  getConfig: (key: string) => {
-    const config = ipcRenderer.sendSync('config');
-    if (!config) {
-      throw new Error('config not loaded');
-    }
-    return config[key];
-  },
-  getConfigConstants,
   onConfigChange: <T extends object = any>(action: (config: T) => void) => {
     ipcRenderer.on('config-reload', (e, config) => {
-      console.log('config reload', e);
       action(config);
     });
   },
-  requestLocalFile: (path: string) => ipcRenderer.invoke('request-local-file', path) as Promise<string>,
+  callMain,
 };
 contextBridge.exposeInMainWorld('bridge', BridgeApi);
