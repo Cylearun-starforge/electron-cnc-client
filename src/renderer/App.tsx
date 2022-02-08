@@ -1,46 +1,19 @@
 import { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { ThemeProvider } from '@renderer/contexts';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Index } from '@renderer/pages';
 
 function App() {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    console.log(window.bridge.dirname);
-  }, []);
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>Hello Vite + React</p>
-        <p>
-          <button onClick={() => setCount((count) => count + 1)}>
-            count {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className='App-link'
-            href='https://reactjs.org'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className='App-link'
-            href='https://vitejs.dev/guide/features.html'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
+    <ThemeProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path={'/'} element={<Index />}>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

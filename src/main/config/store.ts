@@ -3,8 +3,10 @@ import fs from 'fs';
 import { readFile } from 'fs/promises';
 import { ConfigConst } from '@main/config/const';
 import { join } from 'path';
+import { Keys } from '@common/config/keys';
+import type { BrowserWindow } from 'electron';
 
-const configPath = join(ConfigConst.ConfigDir, ConfigConst.ClientConfigName);
+const configPath = join(ConfigConst.ConfigDir, Keys.clientConfiguration);
 
 export class ConfigStore {
   #config: object | null = null;
@@ -15,28 +17,22 @@ export class ConfigStore {
   }
 
   constructor() {
-    this.readConfig().then(value => {
-      this.#config = value;
-    });
+    this.readConfig();
     ConfigStore.#instance = this;
-
-    console.log('Start watching config dir', ConfigConst.ConfigDir);
-    fs.watch(ConfigConst.ConfigDir, async (event, file) => {
-      if (event === 'change' && file === ConfigConst.ClientConfigName) {
-        console.log(ConfigConst.ClientConfigName, 'changed, reload config');
-        this.#config = await this.readConfig();
-      }
-    });
   }
 
   async readConfig() {
     const buffer = await readFile(configPath);
-    return JSON.parse(buffer.toString());
-
+    this.#config = JSON.parse(buffer.toString());
   }
 
   get config() {
     return this.#config;
   }
 
+  sendToRender(window: BrowserWindow) {
+    window.webContents.send('config-reload', this.#config);
+    console.log('send new config', this.#config);
+
+  }
 }
