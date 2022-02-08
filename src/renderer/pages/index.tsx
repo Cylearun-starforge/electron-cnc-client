@@ -5,7 +5,7 @@ const Background = styled.img`
   width: 100vw;
   height: 100vh;
   position: absolute;
-  object-fic: cover;
+  object-fit: cover;
 `;
 export const Index: FC = () => {
   const [bg, setBg] = useState('');
