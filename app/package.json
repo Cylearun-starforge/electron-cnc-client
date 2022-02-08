@@ -1,8 +1,14 @@
 {
-  "name": "vite-project",
-  "version": "0.1.0",
   "license": "MIT",
   "main": "index.js",
+  "name": "cnc-client",
+  "version": "0.1.0",
+  "author": {
+    "name": "Woodykaixa",
+    "url": "https://github.com/Woodykaixa",
+    "email": "690750353@qq.com"
+  },
+  "description": "A new client for Command & Conquer games written in electron",
   "devDependencies": {
     "electron": "^17.0.0"
   }

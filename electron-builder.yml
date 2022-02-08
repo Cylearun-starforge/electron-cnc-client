@@ -1,6 +1,6 @@
-appId: com.jctaoo.electron_starter
-productName: electron starter
-copyright: Copyright © 2021 jctaoo
+appId: com.woodykaixa.cnc-client
+productName: Command & Conquer Client
+copyright: Copyright © 2022 Woodykaixa
 electronDownload:
   mirror: https://registry.npmmirror.com/-/binary/electron/v
 directories:

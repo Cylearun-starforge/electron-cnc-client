@@ -1,6 +1,12 @@
 {
-  "name": "vite-electron-esbuild-starter",
-  "version": "0.2.1",
+  "name": "cnc-client",
+  "version": "0.1.0",
+  "author": {
+    "name": "Woodykaixa",
+    "url": "https://github.com/Woodykaixa",
+    "email": "690750353@qq.com"
+  },
+  "description": "A new client for Command & Conquer games written in electron",
   "license": "MIT",
   "scripts": {
     "dev": "cross-env NODE_ENV=development elecrun --vite --preload preload.ts",
