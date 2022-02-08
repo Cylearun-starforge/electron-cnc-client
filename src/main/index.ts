@@ -1,8 +1,7 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow } from 'electron';
 import { join } from 'path';
 import { pathToFileURL } from 'url';
 import { ConfigStore } from '@main/config/store';
-import { ConfigConst } from '@main/config/const';
 import { ConfigWatcher } from '@main/config/watch';
 import { Keys } from '@common/config/keys';
 import { Windows } from '@main/windows';
@@ -41,12 +40,6 @@ async function createWindow() {
 }
 
 function registerIpc() {
-  ipcMain.on('config', event => {
-    event.returnValue = ConfigStore.Instance.config;
-  });
-  ipcMain.on('ConfigConst', event => {
-    event.returnValue = ConfigConst;
-  });
   registerAll();
 }
 

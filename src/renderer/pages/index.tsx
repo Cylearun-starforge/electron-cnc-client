@@ -11,9 +11,11 @@ export const Index: FC = () => {
   const [bg, setBg] = useState('');
 
   useEffect(() => {
-    window.bridge.onConfigChange(async config => {
-      const allConfig = await window.bridge.callMain('get-configuration');
-      const backgroundUrl = allConfig.constants.ThemeDir + '/' + config.defaultTheme + '/loadingscreen.png';
+    (async () => {
+      const config = await window.bridge.callMain('get-configuration');
+      const backgroundUrl =
+        config.constants.ThemeDir + '/' + (config.dynamic!.defaultTheme ?? '') + '/loadingscreen.png';
+      console.log(backgroundUrl)
       window.bridge.callMain('request-local-file', backgroundUrl).then(data => {
         const blob = new Blob([data]);
         const reader = new FileReader();
@@ -22,7 +24,7 @@ export const Index: FC = () => {
           setBg(reader.result as string);
         });
       });
-    });
+    })();
   }, []);
   return (
     <div>
