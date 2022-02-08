@@ -25,6 +25,10 @@ export class ConfigStore {
       const buffer = await readFile(configPath);
       this.#config = JSON.parse(buffer.toString());
     } catch (err) {
+      if (err instanceof SyntaxError && this.#config !== null) {
+        // It's common to cause syntax error when editing configuration file, so we ignore this error.
+        return;
+      }
       if (err instanceof Error) {
         dialog.showErrorBox(err.name, err.message);
       } else {
