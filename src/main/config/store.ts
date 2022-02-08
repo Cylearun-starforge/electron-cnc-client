@@ -2,7 +2,7 @@ import { readFile } from 'fs/promises';
 import { ConfigConst } from '@main/config/const';
 import { join } from 'path';
 import { Keys } from '@common/config/keys';
-import type { BrowserWindow } from 'electron';
+import { app, BrowserWindow, dialog } from 'electron';
 import { ClientConfigurationType } from '@common/config/type';
 
 const configPath = join(ConfigConst.ConfigDir, Keys.clientConfiguration);
@@ -21,8 +21,23 @@ export class ConfigStore {
   }
 
   async readConfig() {
-    const buffer = await readFile(configPath);
-    this.#config = JSON.parse(buffer.toString());
+    try {
+      const buffer = await readFile(configPath);
+      this.#config = JSON.parse(buffer.toString());
+    } catch (err) {
+      if (err instanceof Error) {
+        dialog.showErrorBox(err.name, err.message);
+      } else {
+        const toString = (err as any).toString ?? Object.prototype.toString;
+        dialog.showErrorBox(
+          `A error occurred when loading configuration file`,
+          `error: ${toString.call(err)}\nThis error is occurred when reading ${configPath}`
+        );
+      }
+      if (this.#config === null) {
+        app.quit();
+      }
+    }
   }
 
   get config() {
