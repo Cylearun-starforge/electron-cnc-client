@@ -13,11 +13,6 @@ jobs:
 
     runs-on: windows-2019
 
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x, 16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js 16.x
@@ -26,5 +21,5 @@ jobs:
         node-version: 16.x
         cache: 'npm'
     - run: npm ci
-    - run: npm run pack
+    - run: npm run pack:win
     
