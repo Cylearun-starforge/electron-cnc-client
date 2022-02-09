@@ -9,6 +9,7 @@ const configPath = join(ConfigConst.ConfigDir, Keys.clientConfiguration);
 
 export class ConfigStore {
   #config: ClientConfigurationType = {};
+  #isBootLoad = true;
   static #instance: ConfigStore | null = null;
 
   static get Instance() {
@@ -24,8 +25,9 @@ export class ConfigStore {
     try {
       const buffer = await readFile(configPath);
       this.#config = JSON.parse(buffer.toString());
+      this.#isBootLoad = false;
     } catch (err) {
-      if (err instanceof SyntaxError && this.#config !== null) {
+      if (err instanceof SyntaxError && !this.#isBootLoad) {
         // It's common to cause syntax error when editing configuration file, so we ignore this error.
         return;
       }
@@ -38,9 +40,7 @@ export class ConfigStore {
           `error: ${toString.call(err)}\nThis error is occurred when reading ${configPath}`
         );
       }
-      if (this.#config === null) {
-        app.quit();
-      }
+      app.quit();
     }
   }
 
