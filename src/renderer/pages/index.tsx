@@ -1,5 +1,7 @@
 import { FC, ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router';
+
 const { callMain } = window.bridge;
 const Background = styled.img`
   width: 100vw;
@@ -59,6 +61,15 @@ const setLoadingScreenByConfig = async () => {
 export const Index: FC = () => {
   const [bg, setBg] = useState('');
   const [loading, setLoading] = useState<ReactNode>('loading');
+  const navigate = useNavigate();
+  useEffect(() => {
+    setTimeout(() => {
+      navigate('/client', {
+        replace: true,
+      });
+    }, 2000);
+  }, [navigate]);
+
   useEffect(() => {
     setLoadingScreenByConfig().then(config => {
       setBg(config.backgroundUrl);
