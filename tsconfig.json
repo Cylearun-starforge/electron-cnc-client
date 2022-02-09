@@ -26,7 +26,7 @@
       "@renderer/*": ["renderer/*"]
     },
     "noEmit": true,
-    "typeRoots": ["./typings"]
+    "typeRoots": ["./src/typings", "./node_modules/@types"]
   },
   "exclude": ["node_modules", "app", "dist"]
 }

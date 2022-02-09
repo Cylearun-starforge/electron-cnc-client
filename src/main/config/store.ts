@@ -50,6 +50,5 @@ export class ConfigStore {
 
   sendToRender(window: BrowserWindow) {
     window.webContents.send('config-reload', this.#config);
-    console.log('send new config', this.#config);
   }
 }

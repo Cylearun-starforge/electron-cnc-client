@@ -1,6 +1,7 @@
 import { ConfigConst } from '@main/config/const';
 import { ConfigStore } from '@main/config/store';
-import { ipcMain, IpcMainInvokeEvent } from 'electron';
+import { MainWindow } from '@main/windows';
+import { app, dialog, ipcMain, IpcMainInvokeEvent } from 'electron';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
 
@@ -18,6 +19,11 @@ export const Invocable = {
   },
   'path-join': async (event: IpcMainInvokeEvent, ...path: string[]) => {
     return join(...path);
+  },
+  'close-app-on-error': async (event: IpcMainInvokeEvent, error: string, message: string) => {
+    MainWindow.Instance.destroy();
+    dialog.showErrorBox(error, message);
+    app.quit();
   },
 };
 
