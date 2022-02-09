@@ -72,8 +72,11 @@
     ]
   },
   "dependencies": {
+    "animate.css": "^4.1.1",
     "express": "^4.17.2",
     "lodash": "^4.17.21",
+    "postcss": "^8.4.6",
+    "postcss-js": "^4.0.0",
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
     "styled-components": "^5.3.3"

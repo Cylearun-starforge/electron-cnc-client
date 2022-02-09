@@ -24,7 +24,9 @@
       "@main/*": ["main/*"],
       "@common/*": ["common/*"],
       "@renderer/*": ["renderer/*"]
-    }
+    },
+    "noEmit": true,
+    "typeRoots": ["./typings"]
   },
   "exclude": ["node_modules", "app", "dist"]
 }
