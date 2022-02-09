@@ -30,7 +30,7 @@ A new client for Command & Conquer games written in electron
 
 ## Docs
 
-There some Markdown document to help you getting started with CncClient. For now, I'm the only developer, I may not have enough time on docs. 
+There some Markdown document to help you getting started with CncClient. I may not have enough time on docs, so it's welcome to cooperate with you on development and document
 
 1. [ClientConfiguration Reference](/docs/ClientConfiguration.md)
 
