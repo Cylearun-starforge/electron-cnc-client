@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, Menu } from 'electron';
 import { ConfigStore } from '@main/config/store';
 import { ConfigWatcher } from '@main/config/watch';
 import { Keys } from '@common/config/keys';
@@ -7,8 +7,8 @@ import registerIpc from '@main/ipc-invokes';
 
 function createWindow() {
   return MainWindow.create({
-    width: 1600,
-    height: 900,
+    width: 1920,
+    height: 1080,
     show: false,
   });
 }
@@ -23,7 +23,7 @@ async function loadConfig() {
     }
   });
 }
-
+Menu.setApplicationMenu(null);
 app.whenReady().then(async () => {
   createWindow();
   registerIpc();
