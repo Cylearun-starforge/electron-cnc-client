@@ -10,6 +10,8 @@ function createWindow() {
     width: 1920,
     height: 1080,
     show: false,
+    minWidth: 800,
+    minHeight: 600,
   });
 }
 
