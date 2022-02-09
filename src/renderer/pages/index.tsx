@@ -1,6 +1,7 @@
 import { FC, ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router';
+import { toBase64 } from '@common/utils';
 
 const { callMain } = window.bridge;
 const Background = styled.img`
@@ -12,15 +13,6 @@ const Background = styled.img`
   z-index: -10;
   object-fit: cover;
 `;
-const toBase64 = async (buffer: Buffer) =>
-  new Promise<string>(res => {
-    const blob = new Blob([buffer]);
-    const reader = new FileReader();
-    reader.readAsDataURL(blob);
-    reader.addEventListener('load', () => {
-      res(reader.result as string);
-    });
-  });
 
 const setLoadingScreenByConfig = async () => {
   const config = await callMain('get-configuration');
@@ -28,7 +20,7 @@ const setLoadingScreenByConfig = async () => {
   const bgPath = await callMain('path-join', activeThemePath, './loadingscreen.png');
   const backgroundUrl =
     (await callMain('request-local-file', bgPath)
-      .then(toBase64)
+      .then(buffer => toBase64(new Blob([buffer])))
       .catch(() => {})) ?? '';
   let loadingNode: ReactNode;
   if (
@@ -46,7 +38,7 @@ const setLoadingScreenByConfig = async () => {
   if (loading.image) {
     const loadingImageUrl = await window.bridge
       .callMain('request-local-file', activeThemePath + '/' + loading.image)
-      .then(toBase64)
+      .then(buffer => toBase64(new Blob([buffer])))
       .catch(() => {});
     loadingNode = <img src={loadingImageUrl ?? ''} alt={loading.text ?? 'loading'} style={loading.style} />;
   } else {

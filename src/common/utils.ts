@@ -9,3 +9,12 @@ export type DeepPartial<T> = T extends object
       [key in keyof T]?: DeepPartial<T[key]>;
     }
   : T;
+
+export const toBase64 = async (blob: Blob) =>
+  new Promise<string>(res => {
+    const reader = new FileReader();
+    reader.readAsDataURL(blob);
+    reader.addEventListener('load', () => {
+      res(reader.result as string);
+    });
+  });

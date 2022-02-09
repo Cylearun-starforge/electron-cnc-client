@@ -7,4 +7,10 @@ export type ClientConfigurationType = DeepPartial<{
     image: string;
     style: object;
   };
+  main: {
+    background: Array<{
+      image: string;
+      style: object;
+    }>;
+  };
 }>;

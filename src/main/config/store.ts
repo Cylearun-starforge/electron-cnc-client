@@ -8,7 +8,7 @@ import { ClientConfigurationType } from '@common/config/type';
 const configPath = join(ConfigConst.ConfigDir, Keys.clientConfiguration);
 
 export class ConfigStore {
-  #config: ClientConfigurationType | null = null;
+  #config: ClientConfigurationType = {};
   static #instance: ConfigStore | null = null;
 
   static get Instance() {
