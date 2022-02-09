@@ -5,6 +5,7 @@ ClientConfiguration file is usually named as `ClientConfiguration.json`, and pla
 #### defaultTheme
 
 type: `string`
+
 optional: `false`
 
 indicate the fallback theme. If client failed to load a custom theme, it use this theme.
@@ -12,6 +13,7 @@ indicate the fallback theme. If client failed to load a custom theme, it use thi
 ### loading
 
 type: `object`
+
 optional: `false`
 
 Loading screen settings.
@@ -19,6 +21,7 @@ Loading screen settings.
 #### loading.image
 
 type: `string`
+
 optional: `true`
 
 Relative path to a user specific image, which displayed on loading screen as loading icon. Its base path is theme's directory.
@@ -26,6 +29,7 @@ Relative path to a user specific image, which displayed on loading screen as loa
 #### loading.text
 
 type: `string`
+
 optional: `true`
 
 Text displayed on loading screen if `loading.image` is missing.
@@ -33,7 +37,9 @@ Text displayed on loading screen if `loading.image` is missing.
 #### loading.styles
 
 type: `object`
+
 optional: `true`
+
 **Unstable:** This property is unstable, and could be remove in future.
 
 Custom your loading element's (`loading.image` or `loading.text`) style. This object is `React.CSSProperties` object [^1]
