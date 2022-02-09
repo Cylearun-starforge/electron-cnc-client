@@ -1,3 +1,28 @@
+@font-face {
+  font-family: '汉仪细等线';
+  src: url('/assets/fonts/汉仪细等线简.ttf');
+}
+
+@font-face {
+  font-family: '汉仪综艺体';
+  src: url('/assets/fonts/汉仪综艺体简.ttf');
+}
+
+@font-face {
+  font-family: 'Marske';
+  src: url('/assets/fonts/Marske.otf');
+}
+
+@font-face {
+  font-family: 'BureauAgency';
+  src: url('/assets/fonts/BureauAgency.otf');
+}
+
+@font-face {
+  font-family: 'FZQiSTJW-M';
+  src: url('/assets/fonts/FZQiSTJW-M.TTF');
+}
+
 .App {
   text-align: center;
 }
