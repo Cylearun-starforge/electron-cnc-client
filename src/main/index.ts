@@ -44,10 +44,11 @@ app.whenReady().then(async () => {
       });
   }
 
-  createWindow();
+  const asyncWorks = Promise.all([createWindow(), loadConfig()]);
   registerIpc();
-  const asyncWorks = Promise.all([MainWindow.canShow, loadConfig()]);
   await asyncWorks;
+  await MainWindow.canShow;
+
   MainWindow.Instance.show();
   ConfigStore.Instance.sendToRender(MainWindow.Instance);
 });

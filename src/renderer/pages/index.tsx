@@ -3,18 +3,20 @@ import { randomString, toBase64 } from '@common/utils';
 import { FollowMouseElementInformation, ThemeType, useFollowMouse } from '@renderer/contexts';
 import { Keys } from '@common/config/keys';
 import { LoadingScreen, FullScreen } from '@renderer/components';
+import { getConfig } from '@renderer/util/storage';
 
 const { callMain } = window.bridge;
 type ClientProps = {
   background: ReactNode[];
   followMouseInfo: FollowMouseElementInformation[];
 };
+
 async function prepareClientMainUI(theme: ThemeType): Promise<ClientProps> {
   const background = [] as ReactNode[];
   const followMouseInfo = [] as FollowMouseElementInformation[];
 
-  const config = await callMain('get-configuration');
-  const { main } = config.dynamic;
+  const { main } = getConfig();
+
   if (!main) {
     callMain(
       'close-app-on-error',
@@ -33,7 +35,7 @@ async function prepareClientMainUI(theme: ThemeType): Promise<ClientProps> {
     const path = await callMain('path-join', theme.path, bg?.image ?? '');
     const buffer = await callMain('request-local-file', path);
     const url = await toBase64(new Blob([buffer]));
-    const backgroundStyle = Object.assign({}, bg?.style ?? {}, { zIndex: i - backgroundCount });
+    const backgroundStyle = { zIndex: i - backgroundCount };
 
     let id: string | undefined;
     if (bg?.followMouse) {
@@ -44,9 +46,7 @@ async function prepareClientMainUI(theme: ThemeType): Promise<ClientProps> {
       });
       console.log('follower added');
     }
-    const node = (
-      <img src={url} id={id} alt={`background-[${i - backgroundCount}]`} key={i} style={backgroundStyle}></img>
-    );
+    const node = <img src={url} id={id} key={i} style={backgroundStyle} className={bg?.class}></img>;
     background.push(node);
   });
 

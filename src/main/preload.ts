@@ -17,4 +17,6 @@ export const BridgeApi = {
   dirname: __dirname,
   callMain,
 };
+
 contextBridge.exposeInMainWorld('bridge', BridgeApi);
+contextBridge.exposeInMainWorld('env', process.env.NODE_ENV);

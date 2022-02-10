@@ -25,7 +25,7 @@ export type FollowMouseMoveProperties = {
 export type ComponentDeclaration = {
   text: string;
   image: string;
-  style: object;
+  class: string;
 };
 
 export type CarouselProperties = {
@@ -37,15 +37,16 @@ export type CarouselProperties = {
 export type ClientConfigurationType = DeepPartial<{
   defaultTheme: string;
   features: ClientFeatureType[];
+  styleSheets: string[];
   loading: {
     text: string;
     image: string;
-    style: object;
+    class: string;
   };
   main: {
     background: Array<{
       image: string;
-      style: object;
+      class: string;
       followMouse: FollowMouseMoveProperties;
     }>;
     campaign: ComponentDeclaration;
