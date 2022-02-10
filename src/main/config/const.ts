@@ -2,7 +2,7 @@ import { join } from 'path';
 import { Keys } from '@common/config/keys';
 
 
-const ConfigDir = join(__dirname, process.env.CC_CLIENT_CONFIG ?? '..');
+const ConfigDir = join(__dirname, process.env.CC_CLIENT_CONFIG ?? '../..');
 
 export const ConfigConst = {
   ConfigDir,
