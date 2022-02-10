@@ -31,7 +31,10 @@ app.whenReady().then(async () => {
   if (process.env.NODE_ENV === 'development') {
     import('electron-devtools-installer')
       .then(install => {
-        return install.default(install.REACT_DEVELOPER_TOOLS);
+        // @ts-ignore
+        type Installer = typeof install.default;
+        const installer = (install.default as unknown as { default: Installer }).default;
+        return installer(install.REACT_DEVELOPER_TOOLS);
       })
       .then(name => {
         console.log(`Added Extension:  ${name}`);
