@@ -1,6 +1,6 @@
 import './App.css';
 import { ThemeProvider, FollowMouseContext, FollowMouseElementInformation } from '@renderer/contexts';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Index } from '@renderer/pages';
 import { useEffect } from 'react';
 import { moveFollower } from './util/followMouse';
@@ -17,11 +17,11 @@ function App() {
   return (
     <ThemeProvider>
       <FollowMouseContext.Provider value={follower}>
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             <Route path='/' element={<Index />} />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </FollowMouseContext.Provider>
     </ThemeProvider>
   );
