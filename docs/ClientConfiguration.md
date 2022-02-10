@@ -132,15 +132,7 @@ Make this image move when mouse moves. see [FollowMouseMoveProperties](#FollowMo
 type: `object`
 
 With these settings, you specify an element move while mouse moves.
-Formula to calculate element move (in pixel):
-
-$$
-finalMoveX = 
-\begin{cases}
-(mousePositionX - screenCenterX) \times speed.x + offset.x + screenWidth - elementWidth,\,\, (mousePositionX - screenCenterX) \times speed.x < limit.x \\
-limit.x + offset.x + screenWidth - elementWidth,\,\, (mousePositionX - screenCenterX) \times speed.x \ge limit.x \\
-\end{cases}
-$$
+Formula to calculate element move (in pixel): see https://github.com/Cylearun-starforge/electron-cnc-client/blob/a5c907bc2f588770cf1f034754027bf72aada792/src/renderer/util/followMouse.ts#L31
 
 > This feature is implement by modifying element's style, which means you should set element's position style to `fixed` or `absolute`
 
