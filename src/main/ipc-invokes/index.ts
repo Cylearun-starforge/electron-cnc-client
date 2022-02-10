@@ -4,6 +4,7 @@ import { MainWindow } from '@main/windows';
 import { app, dialog, ipcMain, IpcMainInvokeEvent } from 'electron';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
+import { exec } from 'child_process';
 
 export const Invocable = {
   'request-local-file': async (event: IpcMainInvokeEvent, path: string) => {
@@ -24,6 +25,9 @@ export const Invocable = {
     MainWindow.Instance.destroy();
     dialog.showErrorBox(error, message);
     app.quit();
+  },
+  'open-in-explorer': async (event: IpcMainInvokeEvent, path: string) => {
+    exec(`explorer.exe ${path}`);
   },
 };
 

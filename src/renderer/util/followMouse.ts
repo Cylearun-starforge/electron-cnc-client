@@ -29,7 +29,6 @@ function fallback<TBase = string, TCandidate = NonNullable<TBase>>(
   return allow.includes(candidate as any) ? candidate : fallback;
 }
 export function moveFollower(event: MouseEvent, follower: FollowMouseElementInformation) {
-  console.log('client y', event.clientY);
   const element = document.getElementById(follower.elementId);
   if (!element) {
     return;
@@ -52,7 +51,6 @@ export function moveFollower(event: MouseEvent, follower: FollowMouseElementInfo
     bottom: config.maxMove?.bottom ?? Infinity,
   };
 
-  console.log('limit', limits);
 
   const mouseOffsetX = event.clientX - document.body.clientWidth / 2;
   const mouseOffsetY = event.clientY - document.body.clientHeight / 2;
@@ -61,10 +59,8 @@ export function moveFollower(event: MouseEvent, follower: FollowMouseElementInfo
 
   if (moveX < 0 && limits.left < -moveX) {
     moveX = -limits.left;
-    console.log('ll')
   } else if (moveX > 0 && limits.right < moveX) {
     moveX = limits.right;
-    console.log('lr')
   }
 
   if (moveY < 0 && limits.top < -moveY) {
