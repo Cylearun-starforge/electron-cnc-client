@@ -19,4 +19,4 @@ export const BridgeApi = {
 };
 
 contextBridge.exposeInMainWorld('bridge', BridgeApi);
-contextBridge.exposeInMainWorld('env', process.env.NODE_ENV);
+contextBridge.exposeInMainWorld('env', process.env.NODE_ENV === 'development' ? 'development' : 'production');
