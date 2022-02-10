@@ -1,4 +1,5 @@
 import { DeepPartial } from '@common/utils';
+import { ClientFeatureType } from './features';
 
 export type FollowMouseMoveProperties = {
   speed: {
@@ -20,8 +21,22 @@ export type FollowMouseMoveProperties = {
     right: number;
   };
 };
+
+export type ComponentDeclaration = {
+  text: string;
+  image: string;
+  style: object;
+};
+
+export type CarouselProperties = {
+  auto: boolean;
+  manualSwitch: boolean;
+  title: Array<{}>;
+};
+
 export type ClientConfigurationType = DeepPartial<{
   defaultTheme: string;
+  features: ClientFeatureType[];
   loading: {
     text: string;
     image: string;
@@ -33,5 +48,6 @@ export type ClientConfigurationType = DeepPartial<{
       style: object;
       followMouse: FollowMouseMoveProperties;
     }>;
+    campaign: ComponentDeclaration;
   };
 }>;
