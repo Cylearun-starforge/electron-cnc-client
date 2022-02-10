@@ -1,15 +1,15 @@
-# CncClient
+# electron-cnc-client
 
 A new client for Command & Conquer games written in electron
 
-## Why CncClient
+## Why electron-cnc-client
 
 1. For mod creators
 
    - Rendering complex element on client: drawing polygen buttons, linking video elements, etc.
    - Responsive client UI, looks good for every screen.
    - Interact with other softwares. [^1]
-   - Scalable localization support
+   - Scalable localization support.
 
 2. For players
 
@@ -30,7 +30,7 @@ A new client for Command & Conquer games written in electron
 
 ## Docs
 
-There some Markdown document to help you getting started with CncClient. I may not have enough time on docs, so it's welcome to cooperate with you on development and document
+There some Markdown document to help you getting started with electron-cnc-client. I may not have enough time on docs, so it's welcome to cooperate with you on development and document
 
 1. [ClientConfiguration Reference](/docs/ClientConfiguration.md)
 
