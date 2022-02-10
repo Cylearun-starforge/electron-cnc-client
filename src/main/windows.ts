@@ -27,7 +27,7 @@ export class MainWindow extends BrowserWindow {
         nodeIntegration: false,
         contextIsolation: true,
         preload,
-        devTools: isDevelopment,
+        // devTools: isDevelopment,
       },
       show: false,
     });
@@ -44,9 +44,9 @@ export class MainWindow extends BrowserWindow {
     (async () => {
       await this.loadURL(loadUrl);
 
-      if (isDevelopment) {
+      // if (isDevelopment) {
         this.webContents.toggleDevTools();
-      }
+      // }
     })();
   }
 }

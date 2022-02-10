@@ -4,7 +4,6 @@ import { ConfigWatcher } from '@main/config/watch';
 import { Keys } from '@common/config/keys';
 import { MainWindow } from '@main/windows';
 import registerIpc from '@main/ipc-invokes';
-import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 
 function createWindow() {
   return MainWindow.create({
@@ -30,7 +29,10 @@ async function loadConfig() {
 Menu.setApplicationMenu(null);
 app.whenReady().then(async () => {
   if (process.env.NODE_ENV === 'development') {
-    installExtension(REACT_DEVELOPER_TOOLS)
+    import('electron-devtools-installer')
+      .then(install => {
+        return install.default(install.REACT_DEVELOPER_TOOLS);
+      })
       .then(name => {
         console.log(`Added Extension:  ${name}`);
       })
