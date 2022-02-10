@@ -29,9 +29,18 @@ export type ComponentDeclaration = {
 };
 
 export type CarouselProperties = {
-  auto: boolean;
-  manualSwitch: boolean;
-  title: Array<{}>;
+  auto: {
+    duration: number;
+    ltr: boolean;
+  }
+  title: {},
+  mask: string;
+  class: string;
+  content: Array<{
+    image: string;
+    class: string;
+    href: string;
+  }>;
 };
 
 export type ClientConfigurationType = DeepPartial<{
@@ -50,5 +59,6 @@ export type ClientConfigurationType = DeepPartial<{
       followMouse: FollowMouseMoveProperties;
     }>;
     campaign: ComponentDeclaration;
+    carousel: CarouselProperties;
   };
 }>;

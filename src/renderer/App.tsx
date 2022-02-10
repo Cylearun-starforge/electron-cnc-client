@@ -1,12 +1,16 @@
 import './App.css';
-import { ThemeProvider, FollowMouseContext, FollowMouseElementInformation } from '@renderer/contexts';
+import { useFollowMouse, useStyleContext } from '@renderer/contexts';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Index } from '@renderer/pages';
 import { useEffect } from 'react';
 import { moveFollower } from './util/followMouse';
 import { Keys } from '@common/config/keys';
-const follower = [] as FollowMouseElementInformation[];
+import { Helmet } from 'react-helmet';
+
 function App() {
+  const follower = useFollowMouse();
+  const [cssNodes] = useStyleContext();
+
   useEffect(() => {
     document.body.addEventListener('mousemove', e => {
       console.log(e.x, e.y);
@@ -22,15 +26,18 @@ function App() {
     });
   }, []);
   return (
-    <ThemeProvider>
-      <FollowMouseContext.Provider value={follower}>
-        <HashRouter>
-          <Routes>
-            <Route path='/' element={<Index />} />
-          </Routes>
-        </HashRouter>
-      </FollowMouseContext.Provider>
-    </ThemeProvider>
+    <>
+      <HashRouter>
+        <Helmet>
+          {cssNodes.map(css => (
+            <link rel='stylesheet' key={css} href={css}></link>
+          ))}
+        </Helmet>
+        <Routes>
+          <Route path='/' element={<Index />} />
+        </Routes>
+      </HashRouter>
+    </>
   );
 }
 

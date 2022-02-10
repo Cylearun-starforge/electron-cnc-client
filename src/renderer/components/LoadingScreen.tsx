@@ -1,8 +1,9 @@
-import { FC, ReactNode, useEffect, useRef, useState } from 'react';
+import { FC, ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { toBase64 } from '@common/utils';
-import { ThemeType, useTheme } from '@renderer/contexts';
-import { loadFile } from '@renderer/util/polyfill';
+import { useTheme } from '@renderer/contexts';
+import { Runtime } from '@renderer/util/runtime';
+import { useInjectCss } from '@renderer/hooks';
 
 const { callMain } = window.bridge;
 const Background = styled.img`
@@ -14,39 +15,59 @@ const Background = styled.img`
   z-index: -10;
   object-fit: cover;
 `;
-
-const loadCss = async (styleSheets: string[], themePath: string) => {
-  const cssPathPromises = styleSheets.map(async css => {
-    if (css.startsWith('https://')) {
-      return css;
-    }
-    const path = await callMain('path-join', themePath, css!);
-    return loadFile(path, 'text/css');
-  });
-  const allPath = await Promise.all(cssPathPromises);
-  const cssFragment = document.createDocumentFragment();
-  allPath.forEach(path => {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = path;
-    cssFragment.append(link);
-  });
-  document.head.append(cssFragment);
+type SwitchFunction = () => void;
+export const LoadingScreen: FC<{
+  switchToIndex: SwitchFunction;
+}> = ({ switchToIndex }) => {
+  const { background, loading } = useInit(switchToIndex);
+  return (
+    <div>
+      {loading}
+      <Background src={background} alt='loading' />
+    </div>
+  );
 };
 
-const setLoadingScreenByConfig = async () => {
-  const config = await callMain('get-configuration');
-  const themeName = config.dynamic.defaultTheme ?? '';
-  const themePath = await callMain('path-join', config.constants.ThemeDir, themeName);
-  const loadingCss = loadCss((config.dynamic.styleSheets ?? []) as string[], themePath);
+function useInit(switchToIndex: SwitchFunction) {
+  const [background, setBg] = useState('');
+  const [loading, setLoading] = useState<ReactNode>('loading');
+  const [, setTheme] = useTheme();
+
+  useInjectCss();
+
+  useEffect(() => {
+    setLoadingScreenByConfig().then(config => {
+      const theme = {
+        name: config.themeName,
+        path: config.themePath,
+      };
+      setTheme(theme);
+      setBg(config.backgroundUrl);
+      if (config.loadingNode) {
+        setLoading(config.loadingNode);
+      }
+      switchToIndex();
+    });
+  }, []);
+
+  return {
+    background,
+    loading,
+  };
+}
+
+async function setLoadingScreenByConfig() {
+  await Runtime.init();
+  const config = Runtime.config;
+  const themeName = config.defaultTheme ?? '';
+  const themePath = await callMain('path-join', Runtime.constants.ThemeDir, themeName);
   const bgPath = await callMain('path-join', themePath, './loadingscreen.png');
   const backgroundUrl =
     (await callMain('request-local-file', bgPath)
       .then(buffer => toBase64(new Blob([buffer])))
       .catch(() => {})) ?? '';
   let loadingNode: ReactNode;
-  await loadingCss;
-  if (!config.dynamic.loading || (!config.dynamic.loading.text && !config.dynamic.loading.image)) {
+  if (!config.loading || (!config.loading.text && !config.loading.image)) {
     return {
       backgroundUrl,
       loadingNode,
@@ -54,7 +75,7 @@ const setLoadingScreenByConfig = async () => {
       themePath,
     };
   }
-  const { loading } = config.dynamic;
+  const { loading } = config;
 
   if (loading.image) {
     const loadingImageUrl = await window.bridge
@@ -71,33 +92,4 @@ const setLoadingScreenByConfig = async () => {
     themeName,
     themePath,
   };
-};
-
-export const LoadingScreen: FC<{
-  onReady: (theme: ThemeType) => void;
-}> = ({ onReady }) => {
-  const [bg, setBg] = useState('');
-  const [loading, setLoading] = useState<ReactNode>('loading');
-  const [, setTheme] = useTheme();
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    setLoadingScreenByConfig().then(config => {
-      const theme = {
-        name: config.themeName,
-        path: config.themePath,
-      };
-      setTheme(theme);
-      setBg(config.backgroundUrl);
-      if (config.loadingNode) {
-        setLoading(config.loadingNode);
-      }
-      onReady(theme);
-    });
-  }, []);
-  return (
-    <div ref={ref}>
-      {loading}
-      <Background src={bg} alt='loading' />
-    </div>
-  );
-};
+}
