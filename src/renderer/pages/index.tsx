@@ -1,9 +1,10 @@
 import { FC, ReactNode, useEffect, useState } from 'react';
-import { randomString, toBase64 } from '@common/utils';
-import { useFollowMouse, useTheme } from '@renderer/contexts';
-import { LoadingScreen, FullScreen, Carousel } from '@renderer/components';
+import { toBase64 } from '@common/utils';
+import { useTheme } from '@renderer/contexts';
+import { LoadingScreen, FullScreen } from '@renderer/components';
 import { Runtime } from '@renderer/util/runtime';
 import { loadFile } from '@renderer/util/polyfill';
+import { parseHtml } from '@renderer/util/parseHtml';
 
 const { callMain } = window.bridge;
 
@@ -48,14 +49,14 @@ function useCarousel() {
           return r.reason;
         });
 
-      setCarousel(<Carousel contents={contents} className={main.carousel.class} mask={maskPath} auto={auto} />);
+      // setCarousel(<Carousel contents={contents} className={main.carousel.class} mask={maskPath} auto={auto} />);
     })();
-  }, [config]);
+  }, [config, theme]);
   return carousel;
 }
 
 function useInit() {
-  const followers = useFollowMouse();
+  // const followers = useFollowMouse();
   const [background, setBackground] = useState<ReactNode[]>([]);
   const [theme] = useTheme();
   const carousel = useCarousel();
@@ -75,13 +76,13 @@ function useInit() {
       const url = await toBase64(new Blob([buffer]));
 
       let id: string | undefined;
-      if (bg?.followMouse) {
-        id = randomString();
-        followers.push({
-          config: bg.followMouse,
-          elementId: id,
-        });
-      }
+      // if (bg?.followMouse) {
+      //   id = randomString();
+      //   followers.push({
+      //     config: bg.followMouse,
+      //     elementId: id,
+      //   });
+      // }
       const node = (
         <img alt='' src={url} id={id} key={i} style={{ zIndex: i - backgroundCount }} className={bg?.class} />
       );
@@ -99,19 +100,36 @@ function useInit() {
   };
 }
 
+function useParseHtml() {
+  const [node, setNode] = useState<ReactNode>();
+  const [theme] = useTheme();
+  const config = Runtime.config;
+  useEffect(() => {
+    (async () => {
+      if (!config) {
+        return;
+      }
+
+      const mainLayout = config.main!;
+      const mainPath = await callMain('path-join', theme.path, mainLayout);
+      const mainBuffer = await callMain('request-local-file', mainPath);
+      const decoder = new TextDecoder();
+
+      const htmlNode = await parseHtml(decoder.decode(mainBuffer));
+      setNode(htmlNode);
+    })();
+  }, [theme, config]);
+  return node;
+}
+
 export const Index: FC = () => {
   const [ready, setReady] = useState(false);
-  const { background: bgNodes, carousel } = useInit();
-
+  // const { background: bgNodes, carousel } = useInit();
+  const node = useParseHtml();
   return (
     <>
       {!ready && <LoadingScreen switchToIndex={() => setReady(true)} />}
-      {ready && (
-        <FullScreen>
-          {bgNodes}
-          {carousel}
-        </FullScreen>
-      )}
+      {ready && <FullScreen>{node}</FullScreen>}
     </>
   );
 };

@@ -1,10 +1,10 @@
 import { FollowMouseMoveProperties } from '@common/config/type';
-import { DeepPartial } from '@common/utils';
-import { createContext, useContext } from 'react';
+import { createContext, RefObject, useContext } from 'react';
 
 export type FollowMouseElementInformation = {
-  config: DeepPartial<FollowMouseMoveProperties>;
-  elementId: string;
+  config: FollowMouseMoveProperties;
+  element: RefObject<HTMLDivElement>;
+  id: string;
 };
 
 export const FollowMouseContext = createContext<FollowMouseElementInformation[]>([]);

@@ -1,5 +1,4 @@
 import { useStyleContext, useTheme } from '@renderer/contexts';
-import { loadFile } from '@renderer/util/polyfill';
 import { Runtime } from '@renderer/util/runtime';
 import { useEffect } from 'react';
 
@@ -15,11 +14,8 @@ export function useInjectCss() {
     }
 
     const cssPathPromises = styleSheets.map(async css => {
-      if (css.startsWith('https://')) {
-        return css;
-      }
       const path = await window.bridge.callMain('path-join', theme.path, css);
-      return loadFile(path, 'text/css');
+      return window.bridge.callMain('process-css', path);
     });
 
     const newNodes = [] as string[];

@@ -29,7 +29,7 @@ function fallback<TBase = string, TCandidate = NonNullable<TBase>>(
   return allow.includes(candidate as any) ? candidate : fallback;
 }
 export function moveFollower(event: MouseEvent, follower: FollowMouseElementInformation) {
-  const element = document.getElementById(follower.elementId);
+  const element = follower.element.current;
   if (!element) {
     return;
   }
@@ -50,7 +50,6 @@ export function moveFollower(event: MouseEvent, follower: FollowMouseElementInfo
     top: config.maxMove?.top ?? -Infinity,
     bottom: config.maxMove?.bottom ?? Infinity,
   };
-
 
   const mouseOffsetX = event.clientX - document.body.clientWidth / 2;
   const mouseOffsetY = event.clientY - document.body.clientHeight / 2;

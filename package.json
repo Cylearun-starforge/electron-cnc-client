@@ -75,9 +75,15 @@
   },
   "dependencies": {
     "lodash": "^4.17.21",
+    "postcss": "^8.4.6",
     "react-helmet": "^6.1.0",
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
-    "styled-components": "^5.3.3"
+    "rehype-parse": "^8.0.4",
+    "rehype-react": "^7.0.4",
+    "rehype-sanitize": "^5.0.1",
+    "styled-components": "^5.3.3",
+    "swiper": "^8.0.5",
+    "unified": "^10.1.1"
   }
 }

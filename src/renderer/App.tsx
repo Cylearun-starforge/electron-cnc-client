@@ -9,11 +9,10 @@ import { Helmet } from 'react-helmet';
 
 function App() {
   const follower = useFollowMouse();
-  const [cssNodes] = useStyleContext();
+  const [cssContents] = useStyleContext();
 
   useEffect(() => {
     document.body.addEventListener('mousemove', e => {
-      console.log(e.x, e.y);
       follower.forEach(fo => {
         moveFollower(e, fo);
       });
@@ -29,8 +28,8 @@ function App() {
     <>
       <HashRouter>
         <Helmet>
-          {cssNodes.map(css => (
-            <link rel='stylesheet' key={css} href={css}></link>
+          {cssContents.map(css => (
+            <style key={css}>{css}</style>
           ))}
         </Helmet>
         <Routes>
