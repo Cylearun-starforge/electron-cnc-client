@@ -44,3 +44,8 @@ Specify max move range on each side (in pixel). Missing fields fallback to `Infi
 #### property: `z-index`
 
 Specify wrapper element's `z-index`. Default value: 0
+
+### a
+
+This `<a>` tag is same as HTML's original tag, but client will open `href` in explorer. For urls, it open in browser.
+For path, it open folder
