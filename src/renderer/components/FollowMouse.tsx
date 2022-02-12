@@ -14,6 +14,7 @@ export type FollowMouseProps = {
   'max-move-bottom'?: number;
   'max-move-left'?: number;
   'max-move-right'?: number;
+  'z-index'?: string;
   children: ReactNode;
 };
 
@@ -30,7 +31,7 @@ const parseAndCheck = (
   if (t !== 'number' && t !== 'string') {
     return fallback;
   }
-  const p = t === 'string' ? parse(value, 10) : value;
+  const p = t === 'string' ? parse(value, 10) : (value as number);
   if (isNaN(p)) {
     return fallback;
   }
@@ -66,6 +67,8 @@ export function FollowMouse({ children, ...props }: FollowMouseProps) {
       y: parseAndCheck(props['speed-y'], 1, parseFloat),
     },
   };
+  const zIndex = parseAndCheck(props['z-index'], 0);
+
   useEffect(() => {
     if (!ref.current) {
       return;
@@ -89,6 +92,7 @@ export function FollowMouse({ children, ...props }: FollowMouseProps) {
         position: 'absolute',
         width: '100vw',
         height: '100vh',
+        zIndex,
       }}
     >
       {children}

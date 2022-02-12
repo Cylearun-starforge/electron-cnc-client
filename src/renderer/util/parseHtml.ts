@@ -10,6 +10,7 @@ schema.attributes!['*'].push('style', 'className');
 schema.tagNames!.push('carousel-swiper', 'follow-mouse');
 schema.attributes!['carousel-swiper'] = ['mask'];
 schema.attributes!['follow-mouse'] = [
+  'z-index',
   'speed-x',
   'speed-y',
   'offset-x',
