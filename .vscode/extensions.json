@@ -1,0 +1,19 @@
+{
+  "recommendations": [
+    "styled-components.vscode-styled-components",
+    "cpylua.language-postcss",
+    "dbaeumer.vscode-eslint",
+    "drKnoxy.eslint-disable-snippets",
+    "mkaufman.htmlhint",
+    "streetsidesoftware.code-spell-checker",
+    "codezombiech.gitignore",
+    "aaron-bond.better-comments",
+    "ziyasal.vscode-open-in-github",
+    "jasonnutter.search-node-modules",
+    "jock.svg",
+    "andrejunges.handlebars",
+    "bungcip.better-toml",
+    "mikestead.dotenv",
+    "gruntfuggly.todo-tree"
+  ]
+}
