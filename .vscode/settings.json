@@ -138,5 +138,8 @@
   },
   "emmet.triggerExpansionOnTab": true,
   "typescript.tsdk": "node_modules/typescript/lib",
-  "deno.enable": false
+  "deno.enable": false,
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

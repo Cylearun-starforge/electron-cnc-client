@@ -1,6 +1,18 @@
 # Layout HTML Reference
 
-electron-cnc-client use HTML5 and CSS3 to render UI. So the `Layout HTML` is just HTML5, but we have some extension to help you build UI.
+electron-cnc-client use HTML5 and CSS3 to render UI. However, both HTML and CSS are intend to make static UI,
+to bring you the ability to write dynamic UI, we provide some extension tags.
+We call the HTML with extension tags `Layout HTML`.
+
+## Limitations
+
+Because we have extension tags, you can't preview Layout HTML in other editors or IDEs. The only approach is let electron-cnc-client render it.
+
+For security reasons, you can't link other files like css. To use CSS, add css files in [`ClientConfiguration.json`](./ClientConfiguration.md)
+
+## Extension Tags
+
+You use these tags just like normal HTML tags, and they will render to normal DOM.
 
 ### follow-mouse
 
@@ -13,7 +25,7 @@ Formula to calculate element move (in pixel): see https://github.com/Cylearun-st
 
 Specify move speed of element. `speed-x` field specify the speed on x-axis, and `speed-y` field specify on y-axis. Values of these fields are rate that used to multiply by mouse offset on screen center. Default value: `1`, means move as faster as pointer's speed
 
-#### property: `offset-x`, property: `offset-y`
+#### property: `offset-x`, `offset-y`
 
 A fixed offset (in pixel) of the element position.
 
@@ -28,3 +40,7 @@ Specify which css property is affected by mouse movement. Default value: `top`
 #### property: `max-move-top`, `max-move-bottom`, `max-move-left`, `max-move-right`
 
 Specify max move range on each side (in pixel). Missing fields fallback to `Infinity`, which means unlimited.
+
+#### property: `z-index`
+
+Specify wrapper element's `z-index`. Default value: 0
