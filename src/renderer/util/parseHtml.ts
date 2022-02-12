@@ -3,7 +3,7 @@ import { unified } from 'unified';
 import rehypeParse from 'rehype-parse';
 import rehypeReact from 'rehype-react';
 import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
-import { Image, Slider, FollowMouse } from '@renderer/components';
+import { Image, Slider, FollowMouse, Anchor } from '@renderer/components';
 
 const schema = Object.assign({}, defaultSchema);
 schema.attributes!['*'].push('style', 'className');
@@ -33,6 +33,7 @@ const processor = unified()
     Fragment,
     components: {
       img: Image,
+      a: Anchor,
       'follow-mouse': FollowMouse,
       'carousel-swiper': Slider,
     } as any,
