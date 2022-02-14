@@ -3,13 +3,13 @@ import { unified } from 'unified';
 import rehypeParse from 'rehype-parse';
 import rehypeReact from 'rehype-react';
 import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
-import { Image, Slider, FollowMouse, Anchor, AlphaButton } from '@renderer/components';
+import { Image, Slider, FollowMouse, Anchor, AlphaButton } from '@renderer/components/layout-html-extension';
 
 const schema = Object.assign({}, defaultSchema);
 schema.attributes!['*'].push('style', 'className');
 schema.tagNames!.push('carousel-swiper', 'follow-mouse', 'alpha-button', 'ecc-alpha-button');
 schema.attributes!['carousel-swiper'] = ['mask'];
-schema.attributes!['alpha-button'] = ['src', 'class'];
+schema.attributes!['alpha-button'] = ['src', 'class', 'hover'];
 schema.attributes!['follow-mouse'] = [
   'z-index',
   'speed-x',
