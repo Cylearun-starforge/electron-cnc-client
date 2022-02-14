@@ -45,7 +45,29 @@ Specify max move range on each side (in pixel). Missing fields fallback to `Infi
 
 Specify wrapper element's `z-index`. Default value: 0
 
-### a
+### link-button
 
-This `<a>` tag is same as HTML's original tag, but client will open `href` in explorer. For urls, it open in browser.
-For path, it open folder
+You may need a button or anchor to navigate user to other pages or external website. So we provide you a `<link-button>` tag instead of `<a>` or `<button>`.
+Using our extended `<link-button>`, you can navigate to both external and internal links. More importantly, this tag receives a mask image, so
+you could specify a non-regular clickable area.
+
+### property: `link-type`
+
+Specify the type of `link`. Only `external-link` and `internal-link` are supported, and they have different actions.
+`external=link` tries to open you link in explorer or browser, depends on you link protocol, and `internal-link` is used to
+navigate to another client page.
+
+### property: `link`
+
+The link to navigate.
+
+### property: `mask`
+
+A mask image, used to define clickable area. The black pixel on this image is identified as NON-clickable.
+
+> Now, the image is always fill to fit the entire element. We don't provide fitting options like `object-fit`.
+
+### property: `hover-class`
+
+Because Chromium detecting hover activity by calculating the rect element area, traditional `:hover` pseudo-class don't satisfy our requirement.
+So you could provide a optional `hover-class` indicate that these class is used on hover.
