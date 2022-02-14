@@ -7,16 +7,13 @@ import {
   Image,
   Slider,
   FollowMouse,
-  Anchor,
-  AlphaButton,
   LinkButton,
 } from '@renderer/components/layout-html-extension';
 
 const schema = Object.assign({}, defaultSchema);
 schema.attributes!['*'].push('style', 'className');
-schema.tagNames!.push('carousel-swiper', 'follow-mouse', 'alpha-button', 'link-button');
+schema.tagNames!.push('carousel-swiper', 'follow-mouse', 'link-button');
 schema.attributes!['carousel-swiper'] = ['mask'];
-schema.attributes!['alpha-button'] = ['src', 'class', 'hover'];
 schema.attributes!['follow-mouse'] = [
   'z-index',
   'speed-x',
@@ -30,7 +27,7 @@ schema.attributes!['follow-mouse'] = [
   'max-move-left',
   'max-move-right',
 ];
-schema.attributes!['link-button'] = ['link-type', 'link'];
+schema.attributes!['link-button'] = ['link-type', 'link', 'class', 'mask', 'hover-class'];
 
 schema.tagNames = schema.tagNames?.filter(t => t !== 'title');
 
@@ -42,10 +39,8 @@ const processor = unified()
     Fragment,
     components: {
       img: Image,
-      a: Anchor,
       'follow-mouse': FollowMouse,
       'carousel-swiper': Slider,
-      'alpha-button': AlphaButton,
       'link-button': LinkButton,
     } as any,
   });
