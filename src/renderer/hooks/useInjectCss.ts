@@ -26,7 +26,6 @@ export function useInjectCss() {
         }
       });
       setStyles(newNodes);
-      console.log('css', newNodes);
     });
   }, [theme]);
   return cssNodes;
