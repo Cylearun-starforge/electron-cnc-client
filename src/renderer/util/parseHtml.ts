@@ -3,11 +3,18 @@ import { unified } from 'unified';
 import rehypeParse from 'rehype-parse';
 import rehypeReact from 'rehype-react';
 import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
-import { Image, Slider, FollowMouse, Anchor, AlphaButton } from '@renderer/components/layout-html-extension';
+import {
+  Image,
+  Slider,
+  FollowMouse,
+  Anchor,
+  AlphaButton,
+  LinkButton,
+} from '@renderer/components/layout-html-extension';
 
 const schema = Object.assign({}, defaultSchema);
 schema.attributes!['*'].push('style', 'className');
-schema.tagNames!.push('carousel-swiper', 'follow-mouse', 'alpha-button', 'ecc-alpha-button');
+schema.tagNames!.push('carousel-swiper', 'follow-mouse', 'alpha-button', 'link-button');
 schema.attributes!['carousel-swiper'] = ['mask'];
 schema.attributes!['alpha-button'] = ['src', 'class', 'hover'];
 schema.attributes!['follow-mouse'] = [
@@ -23,6 +30,7 @@ schema.attributes!['follow-mouse'] = [
   'max-move-left',
   'max-move-right',
 ];
+schema.attributes!['link-button'] = ['link-type', 'link'];
 
 schema.tagNames = schema.tagNames?.filter(t => t !== 'title');
 
@@ -38,6 +46,7 @@ const processor = unified()
       'follow-mouse': FollowMouse,
       'carousel-swiper': Slider,
       'alpha-button': AlphaButton,
+      'link-button': LinkButton,
     } as any,
   });
 
