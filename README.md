@@ -20,10 +20,11 @@ A new client for Command & Conquer games written in electron
 
 3. For client developers
 
-   - Render UI with state-driven GUI Library.
+   - Render UI with state-driven UI library.
    - Extends functionality with ease.
-   - Builtin auto-update
-   - Rich ecosystem on npmjs.org
+   - Builtin auto-update.
+   - Rich ecosystem on npmjs.org.
+   - Build on latest technologies, no need to install out-of-date devtools or runtime.
 
 [^1]: e.g. what about showing latest information of your mod, and navigate to official website on click?
 [^2]: Just place your theme configuration in specified location, client will auto detect. Specify a theme to extend, client find missing files form there.
