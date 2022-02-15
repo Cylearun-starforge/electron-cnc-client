@@ -45,17 +45,20 @@ Specify max move range on each side (in pixel). Missing fields fallback to `Infi
 
 Specify wrapper element's `z-index`. Default value: 0
 
-### link-button
+### functional-button
 
-You may need a button or anchor to navigate user to other pages or external website. So we provide you a `<link-button>` tag instead of `<a>` or `<button>`.
-Using our extended `<link-button>`, you can navigate to both external and internal links. More importantly, this tag receives a mask image, so
-you could specify a non-regular clickable area.
+You may need a button or anchor to navigate user to other pages or external website. So we provide you a `<functional-button>` tag instead of `<a>` or `<button>`.
+Using our extended `<functional-button>`, you could access these functionalities: navigate external or internal links, close app.
 
-### property: `link-type`
+### property: `func-type`
 
-Specify the type of `link`. Only `external-link` and `internal-link` are supported, and they have different actions.
-`external=link` tries to open you link in explorer or browser, depends on you link protocol, and `internal-link` is used to
-navigate to another client page.
+Specify the functionality you want.
+
+| value         | functionality                      | description                                                                            |
+| ------------- | ---------------------------------- | -------------------------------------------------------------------------------------- |
+| external-link | Open `link` in explorer or browser | Using explorer or browser depends on you link protocol. You should also specify `link` |
+| client-link   | Navigate to other client page      | You should also specify `link`                                                         |
+| close-app     | Close client                       |                                                                                        |
 
 ### property: `link`
 
