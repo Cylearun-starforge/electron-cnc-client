@@ -50,7 +50,7 @@ Specify wrapper element's `z-index`. Default value: 0
 You may need a button or anchor to navigate user to other pages or external website. So we provide you a `<functional-button>` tag instead of `<a>` or `<button>`.
 Using our extended `<functional-button>`, you could access these functionalities: navigate external or internal links, close app.
 
-### property: `func-type`
+#### property: `func-type`
 
 Specify the functionality you want.
 
@@ -60,17 +60,31 @@ Specify the functionality you want.
 | client-link   | Navigate to other client page      | You should also specify `link`                                                         |
 | close-app     | Close client                       |                                                                                        |
 
-### property: `link`
+#### property: `link`
 
 The link to navigate.
 
-### property: `mask`
+#### property: `mask`
 
 A mask image, used to define clickable area. The black pixel on this image is identified as NON-clickable.
 
 > Now, the image is always fill to fit the entire element. We don't provide fitting options like `object-fit`.
 
-### property: `hover-class`
+#### property: `hover-class`
 
 Because Chromium detecting hover activity by calculating the rect element area, traditional `:hover` pseudo-class don't satisfy our requirement.
 So you could provide a optional `hover-class` indicate that these class is used on hover.
+
+### var-text
+
+Display difference text depends on client's internal variables.
+
+#### property: `var`
+
+Variable's name
+
+| name      | value                | description   |
+| --------- | -------------------- | ------------- |
+| username  | username             |               |
+| theme     | Theme name           |               |
+| themePath | Path to theme folder | Absolute path |
