@@ -22,6 +22,9 @@ export const Invocable = {
   'path-join': async (event: IpcMainInvokeEvent, ...path: string[]) => {
     return join(...path);
   },
+  'close-app': async (event: IpcMainInvokeEvent) => {
+    app.quit();
+  },
   'close-app-on-error': async (event: IpcMainInvokeEvent, error: string, message: string) => {
     MainWindow.Instance.destroy();
     dialog.showErrorBox(error, message);

@@ -1,4 +1,4 @@
 export * from './FollowMouse';
 export * from './img';
-export * from './LinkButton';
+export * from './FunctionalButton';
 export * from './Slider';

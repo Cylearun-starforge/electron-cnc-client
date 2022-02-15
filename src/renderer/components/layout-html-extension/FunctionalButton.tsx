@@ -3,16 +3,16 @@ import { loadFile } from '@renderer/util/polyfill';
 import { ButtonHTMLAttributes, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 
-export type LinkType = 'external-link' | 'client-link';
+export type FunctionalityType = 'external-link' | 'client-link' | 'close-app';
 
-export type LinkButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  ['link-type']?: LinkType;
+export type FunctionalButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  ['func-type']?: FunctionalityType;
   ['hover-class']?: string;
   className?: string;
   link?: string;
   mask?: string;
 };
-export function LinkButton({ children, mask, link, className, ...props }: LinkButtonProps) {
+export function FunctionalButton({ children, mask, link, className, ...props }: FunctionalButtonProps) {
   const navigate = useNavigate();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const canvas = useRef(document.createElement('canvas'));
@@ -74,10 +74,18 @@ export function LinkButton({ children, mask, link, className, ...props }: LinkBu
             return;
           }
         }
-        if (!link || !props['link-type']) {
+        const funcType = props['func-type'];
+        if (!funcType) {
           return;
         }
-        if (props['link-type'] === 'external-link') {
+        if (funcType === 'close-app') {
+          window.bridge.callMain('close-app');
+          return;
+        }
+        if (!link) {
+          return;
+        }
+        if (props['func-type'] === 'external-link') {
           window.bridge.callMain('open-in-explorer', link);
           return;
         }

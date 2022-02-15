@@ -3,16 +3,11 @@ import { unified } from 'unified';
 import rehypeParse from 'rehype-parse';
 import rehypeReact from 'rehype-react';
 import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
-import {
-  Image,
-  Slider,
-  FollowMouse,
-  LinkButton,
-} from '@renderer/components/layout-html-extension';
+import { Image, Slider, FollowMouse, FunctionalButton } from '@renderer/components/layout-html-extension';
 
 const schema = Object.assign({}, defaultSchema);
 schema.attributes!['*'].push('style', 'className');
-schema.tagNames!.push('carousel-swiper', 'follow-mouse', 'link-button');
+schema.tagNames!.push('carousel-swiper', 'follow-mouse', 'functional-button');
 schema.attributes!['carousel-swiper'] = ['mask'];
 schema.attributes!['follow-mouse'] = [
   'z-index',
@@ -27,7 +22,7 @@ schema.attributes!['follow-mouse'] = [
   'max-move-left',
   'max-move-right',
 ];
-schema.attributes!['link-button'] = ['link-type', 'link', 'class', 'mask', 'hover-class'];
+schema.attributes!['functional-button'] = ['func-type', 'link', 'class', 'mask', 'hover-class'];
 
 schema.tagNames = schema.tagNames?.filter(t => t !== 'title');
 
@@ -41,7 +36,7 @@ const processor = unified()
       img: Image,
       'follow-mouse': FollowMouse,
       'carousel-swiper': Slider,
-      'link-button': LinkButton,
+      'functional-button': FunctionalButton,
     } as any,
   });
 
