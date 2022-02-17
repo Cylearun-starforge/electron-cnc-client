@@ -1,7 +1,7 @@
 {
   "license": "MIT",
   "main": "index.js",
-  "name": "cnc-client",
+  "name": "cnc-client-app",
   "version": "0.1.0",
   "author": {
     "name": "Woodykaixa",

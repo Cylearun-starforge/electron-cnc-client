@@ -1,5 +1,6 @@
 appId: com.woodykaixa.cnc-client
 productName: Command & Conquer Client
+electronVersion: 17.0.1
 copyright: Copyright © 2022 Woodykaixa
 electronDownload:
   mirror: https://registry.npmmirror.com/-/binary/electron/v

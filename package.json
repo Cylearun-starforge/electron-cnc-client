@@ -1,5 +1,6 @@
 {
   "name": "cnc-client",
+  "packageManager": "yarn@3.1.1",
   "version": "0.1.0",
   "author": {
     "name": "Woodykaixa",
@@ -9,18 +10,18 @@
   "description": "A new client for Command & Conquer games written in electron",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development elecrun --vite --preload preload.ts",
-    "preview": "npm run build && cross-env NODE_ENV=production electron ./app/",
-    "build": "elecrun build --preload preload.ts && vite build",
-    "clean": "elecrun clean",
-    "pack": "npm run build && npm run rebuild && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder -c ./electron-builder.yml --win --linux",
-    "pack:all": "npm run build && npm run rebuild && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder -c ./electron-builder.yml --win --linux --mac",
-    "pack:win": "npm run build && npm run rebuild && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder -c ./electron-builder.yml --win",
-    "pack:mac": "npm run build && npm run rebuild && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder -c ./electron-builder.yml --mac",
-    "pack:linux": "npm run build && npm run rebuild && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder -c ./electron-builder.yml --linux",
-    "rebuild": "electron-rebuild -m ./app",
-    "postinstall": "electron-builder install-app-deps",
-    "prettier": "prettier -w ."
+    "dev": "yarn cross-env NODE_ENV=development elecrun --vite --preload preload.ts",
+    "preview": "yarn run build && yarn cross-env NODE_ENV=production electron ./app/",
+    "build": "yarn elecrun build --preload preload.ts && yarn vite build",
+    "clean": "yarn elecrun clean",
+    "pack": "yarn run build && yarn run rebuild && yarn cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder -c ./electron-builder.yml --win --linux",
+    "pack:all": "yarn run build && yarn run rebuild && yarn cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder -c ./electron-builder.yml --win --linux --mac",
+    "pack:win": "yarn run build && yarn run rebuild && yarn cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder -c ./electron-builder.yml --win",
+    "pack:mac": "yarn run build && yarn run rebuild && yarn cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder -c ./electron-builder.yml --mac",
+    "pack:linux": "yarn run build && yarn run rebuild && yarn cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder -c ./electron-builder.yml --linux",
+    "rebuild": "yarn electron-rebuild -m ./app",
+    "o:postinstall": "yarn electron-builder install-app-deps",
+    "prettier": "yarn prettier -w ."
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^16.2.1",
@@ -30,6 +31,7 @@
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
     "@types/react-helmet": "^6.1.5",
+    "@types/react-is": "^17",
     "@types/react-router": "^5.1.18",
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.22",
@@ -78,6 +80,7 @@
     "lodash": "^4.17.21",
     "postcss": "^8.4.6",
     "react-helmet": "^6.1.0",
+    "react-is": "^17.0.2",
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
     "rehype-parse": "^8.0.4",
@@ -86,5 +89,13 @@
     "styled-components": "^5.3.3",
     "swiper": "^8.0.5",
     "unified": "^10.1.1"
-  }
+  },
+  "dependenciesMeta": {
+    "electron-builder@22.14.13": {
+      "unplugged": true
+    }
+  },
+  "workspaces": [
+    "app"
+  ]
 }

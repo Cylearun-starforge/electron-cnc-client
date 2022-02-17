@@ -28,5 +28,5 @@
     "noEmit": true,
     "typeRoots": ["./src/typings", "./node_modules/@types"]
   },
-  "exclude": ["node_modules", "app", "dist"]
+  "exclude": ["node_modules", "app", "dist", ".yarn"]
 }
