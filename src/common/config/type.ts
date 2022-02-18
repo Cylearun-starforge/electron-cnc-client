@@ -43,8 +43,16 @@ export type CarouselProperties = {
   }>;
 };
 
+export type WindowSize = {
+  width: number;
+  height: number;
+};
+
 export type ClientConfigurationType = DeepPartial<{
   defaultTheme: string;
+  defaultSize: WindowSize;
+  minimalSize: WindowSize;
+  maximalSize: WindowSize;
   features: ClientFeatureType[];
   styleSheets: string[];
   loading: {

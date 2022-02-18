@@ -6,12 +6,16 @@ import { MainWindow } from '@main/windows';
 import registerIpc from '@main/ipc-invokes';
 
 function createWindow() {
+  const store = ConfigStore.Instance;
+
   return MainWindow.create({
-    width: 1920,
-    height: 1080,
+    width: store.config.defaultSize?.width,
+    height: store.config.defaultSize?.height,
+    minWidth: store.config.minimalSize?.width,
+    minHeight: store.config.minimalSize?.height,
+    maxWidth: store.config.maximalSize?.width,
+    maxHeight: store.config.maximalSize?.height,
     show: false,
-    minWidth: 800,
-    minHeight: 600,
   });
 }
 
@@ -43,10 +47,9 @@ app.whenReady().then(async () => {
         console.log('An error occurred: ', err);
       });
   }
-
-  const asyncWorks = Promise.all([createWindow(), loadConfig()]);
+  await loadConfig();
+  createWindow();
   registerIpc();
-  await asyncWorks;
   await MainWindow.canShow;
 
   MainWindow.Instance.show();
