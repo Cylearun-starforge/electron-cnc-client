@@ -65,7 +65,7 @@ export function FunctionalButton({ children, mask, link, className, ...props }: 
         setHover(on);
       }}
       ref={buttonRef}
-      className={hover ? props['hover-class'] : className}
+      className={`${className} ${hover ? props['hover-class'] : ''}`}
       {...props}
       onClick={e => {
         e.preventDefault();
