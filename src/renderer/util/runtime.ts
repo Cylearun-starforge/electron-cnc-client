@@ -1,4 +1,4 @@
-import type { ClientConfigurationType } from '@common/config/type';
+import type { ClientConfigurationType } from '@common/config';
 import type { DeepPartial } from '@common/utils';
 import type { ConfigConstType } from '@main/config/const';
 import { Keys } from '@common/config/keys';

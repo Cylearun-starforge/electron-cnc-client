@@ -3,7 +3,7 @@ import { ConfigConst } from '@main/config/const';
 import { join } from 'path';
 import { Keys } from '@common/config/keys';
 import { app, BrowserWindow, dialog } from 'electron';
-import { ClientConfigurationType } from '@common/config/type';
+import { ClientConfigurationType } from '@common/config';
 
 const configPath = join(ConfigConst.ConfigDir, Keys.clientConfiguration);
 

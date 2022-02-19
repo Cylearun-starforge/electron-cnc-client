@@ -1,4 +1,4 @@
-import { FollowMouseMoveProperties } from '@common/config/type';
+import { FollowMouseMoveProperties } from '@common/config';
 import { DeepPartial } from '@common/utils';
 import { FollowMouseElementInformation } from '@renderer/contexts';
 

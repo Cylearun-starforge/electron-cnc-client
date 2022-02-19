@@ -1,4 +1,4 @@
-import { FollowMouseMoveProperties } from '@common/config/type';
+import { FollowMouseMoveProperties } from '@common/config/client-config';
 import { createContext, RefObject, useContext } from 'react';
 
 export type FollowMouseElementInformation = {

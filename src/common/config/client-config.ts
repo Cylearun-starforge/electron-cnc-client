@@ -1,5 +1,7 @@
+/**
+ * Type definitions for ClientConfiguration.json
+ */
 import { DeepPartial } from '@common/utils';
-import { ClientFeatureType } from './features';
 
 export type FollowMouseMoveProperties = {
   speed: {
@@ -53,7 +55,6 @@ export type ClientConfigurationType = DeepPartial<{
   defaultSize: WindowSize;
   minimalSize: WindowSize;
   maximalSize: WindowSize;
-  features: ClientFeatureType[];
   styleSheets: string[];
   loading: {
     text: string;

@@ -1,4 +1,4 @@
-import { FollowMouseMoveProperties } from '@common/config/type';
+import { FollowMouseMoveProperties } from '@common/config';
 import { randomString } from '@common/utils';
 import { useFollowMouse } from '@renderer/contexts';
 import { ReactNode, useEffect, useRef, useState } from 'react';
