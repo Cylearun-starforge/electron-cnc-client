@@ -4,7 +4,7 @@ ClientConfiguration file is usually named as `ClientConfiguration.json`, and pla
 
 **Warn**: Although most settings are optional or complementary, you should specify on least 1 of them, otherwise you will get a white screen without any fallback.
 
-#### defaultTheme
+### property: `defaultTheme`
 
 type: `string`
 
@@ -12,7 +12,7 @@ optional: `false`
 
 indicate the fallback theme. If client failed to load a custom theme, it use this theme.
 
-#### styleSheets
+### property: `styleSheets`
 
 type: `string[]`
 
@@ -20,15 +20,17 @@ optional: `true`
 
 A list of css files used for client. Each element in this array is a relative path, whose base path is theme directory. Only local css file is supported, don't try to make client load remove css file.
 
-### loading
+### property: `loading`
 
-type: `object`
+type: `loadingProperties`
 
 optional: `false`
 
 Loading screen settings.
 
-#### loading.image
+### type: `loadingProperties`
+
+#### `loadingProperties.image`
 
 type: `string`
 
@@ -36,7 +38,7 @@ optional: `true`
 
 Relative path to a user specific image, which displayed on loading screen as loading icon. Its base path is theme's root directory.
 
-#### loading.text
+#### `loadingProperties.text`
 
 type: `string`
 
@@ -44,7 +46,7 @@ optional: `true`
 
 Text displayed on loading screen if `loading.image` is missing.
 
-#### loading.styles
+#### `loadingProperties.styles`
 
 type: `object`
 
@@ -63,3 +65,41 @@ type: `string`
 optional: `false`
 
 Client index layout. This field is a relative path to your custom HTML file. Because electron-cnc-client builds on chromium, you can make UI in HTML5 and CSS3. But electron-cnc-client has some extension tags to help you write beautiful UI. See [LayoutHTML](./LayoutHTML.md).
+
+### type: `WindowSize`
+
+#### `WindowSize.height`
+
+type: `number`
+
+optional: `true`
+
+#### `WindowSize.width`
+
+type: `number`
+
+optional: `true`
+
+### property: `defaultSize`
+
+type: `WindowSize`
+
+optional: `true`
+
+The default size of client.
+
+### property: `maximalSize`
+
+type: `WindowSize`
+
+optional: `true`
+
+The maximal size of client.
+
+### property: `minimalSize`
+
+type: `WindowSize`
+
+optional: `true`
+
+The minimal size of client.
