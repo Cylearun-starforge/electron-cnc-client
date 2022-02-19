@@ -22,10 +22,10 @@ function createWindow() {
 async function loadConfig() {
   const store = ConfigStore.Instance;
   await store.readConfig();
+  await store.scanThemes();
   ConfigWatcher.Instance.addWatchHandler(Keys.clientConfiguration, async change => {
     if (change.eventType === 'change') {
       await store.readConfig();
-      store.sendToRender(MainWindow.Instance);
     }
   });
 }
@@ -53,7 +53,6 @@ app.whenReady().then(async () => {
   await MainWindow.canShow;
 
   MainWindow.Instance.show();
-  ConfigStore.Instance.sendToRender(MainWindow.Instance);
 });
 
 app.on('window-all-closed', () => {

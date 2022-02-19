@@ -11,12 +11,17 @@ export const Invocable = {
   'request-local-file': async (event: IpcMainInvokeEvent, path: string) => {
     return readFile(path);
   },
+  'request-json-file': async (event: IpcMainInvokeEvent, path: string) => {
+    const buffer = await readFile(path);
+    return JSON.parse(buffer.toString()) as unknown;
+  },
   'get-configuration': async (event: IpcMainInvokeEvent) => {
     const config = ConfigStore.Instance.config;
     const constants = ConfigConst;
     return {
       constants,
       dynamic: config,
+      themes: ConfigStore.Instance.themes,
     };
   },
   'path-join': async (event: IpcMainInvokeEvent, ...path: string[]) => {

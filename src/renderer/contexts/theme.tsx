@@ -1,9 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
-
-export type ThemeType = {
-  name: string;
-  path: string;
-};
+import type { ThemeType } from '@common/config/type';
 type ThemeContextType = [ThemeType, (theme: ThemeType) => void];
 
 const ThemeContext = createContext<ThemeContextType>(null as unknown as ThemeContextType);

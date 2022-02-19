@@ -1,9 +1,10 @@
 import { FC, ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { toBase64 } from '@common/utils';
-import { useTheme } from '@renderer/contexts';
+import { useGlobalStyle, useTheme } from '@renderer/contexts';
 import { Runtime } from '@renderer/util/runtime';
 import { useInjectCss } from '@renderer/hooks';
+import { Keys } from '@common/config';
 
 const { callMain } = window.bridge;
 const Background = styled.img`
@@ -32,14 +33,15 @@ function useInit(switchToIndex: SwitchFunction) {
   const [background, setBg] = useState('');
   const [loading, setLoading] = useState<ReactNode>('loading');
   const [, setTheme] = useTheme();
-
-  useInjectCss();
+  const [, setStyles] = useGlobalStyle();
+  useInjectCss(setStyles, Runtime.currentTheme?.config?.main.styleSheets);
 
   useEffect(() => {
     setLoadingScreenByConfig().then(config => {
+      const { name, path } = Runtime.currentTheme;
       const theme = {
-        name: config.themeName,
-        path: config.themePath,
+        name,
+        path,
       };
       setTheme(theme);
       setBg(config.backgroundUrl);
@@ -58,9 +60,10 @@ function useInit(switchToIndex: SwitchFunction) {
 
 async function setLoadingScreenByConfig() {
   await Runtime.init();
-  const config = Runtime.config;
-  const themeName = config.defaultTheme ?? '';
-  const themePath = await callMain('path-join', Runtime.constants.ThemeDir, themeName);
+  const config = Runtime.clientConfig;
+  const themeName = localStorage.getItem(Keys.userTheme) ?? config.defaultTheme ?? '';
+  await Runtime.loadTheme(themeName);
+  const themePath = Runtime.currentTheme.path;
   const bgPath = await callMain('path-join', themePath, './loadingscreen.png');
   const backgroundUrl =
     (await callMain('request-local-file', bgPath)
@@ -71,8 +74,6 @@ async function setLoadingScreenByConfig() {
     return {
       backgroundUrl,
       loadingNode,
-      themeName,
-      themePath,
     };
   }
   const { loading } = config;
@@ -89,7 +90,5 @@ async function setLoadingScreenByConfig() {
   return {
     backgroundUrl,
     loadingNode,
-    themeName,
-    themePath,
   };
 }

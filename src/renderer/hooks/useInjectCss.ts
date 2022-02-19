@@ -1,14 +1,13 @@
-import { useStyleContext, useTheme } from '@renderer/contexts';
-import { Runtime } from '@renderer/util/runtime';
+import { useTheme } from '@renderer/contexts';
 import { useEffect } from 'react';
 
-export function useInjectCss() {
+export function useInjectCss(setStyles?: (styles: string[]) => void, styleSheets?: string[]) {
   const [theme] = useTheme();
-  const [, setStyles] = useStyleContext();
-  const cssNodes: HTMLLinkElement[] = [];
 
   useEffect(() => {
-    const styleSheets = Runtime.config?.styleSheets as string[];
+    if (!setStyles) {
+      return;
+    }
     if (!styleSheets || styleSheets.length === 0) {
       return;
     }
@@ -27,6 +26,5 @@ export function useInjectCss() {
       });
       setStyles(newNodes);
     });
-  }, [theme]);
-  return cssNodes;
+  }, [theme, styleSheets, setStyles]);
 }

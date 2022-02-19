@@ -1,3 +1,4 @@
 export * from './followMouse';
-export * from './styles';
+export * from './global-styles';
 export * from './theme';
+export * from './page-styles';
