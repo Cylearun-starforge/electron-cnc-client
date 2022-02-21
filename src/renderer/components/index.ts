@@ -1,2 +1,2 @@
-export * from './FullScreen';
-export * from './LoadingScreen';
+export * from './full-screen';
+export * from './loading-screen';

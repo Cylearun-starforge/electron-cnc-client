@@ -1,9 +1,7 @@
 import { FC, ReactNode, useEffect, useState } from 'react';
 import { LoadingScreen, FullScreen } from '@renderer/components';
 import { Runtime } from '@renderer/util/runtime';
-import { parseHtml } from '@renderer/util/parseHtml';
-import { useInjectCss } from '@renderer/hooks';
-import { Helmet } from 'react-helmet';
+import { parseHtml } from '@renderer/util/parse-html';
 
 const { callMain } = window.bridge;
 

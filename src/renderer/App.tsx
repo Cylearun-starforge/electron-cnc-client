@@ -1,9 +1,9 @@
-import './App.css';
+import './app.css';
 import { useFollowMouse, useGlobalStyle } from '@renderer/contexts';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Index } from '@renderer/pages';
 import { useEffect } from 'react';
-import { moveFollower } from './util/followMouse';
+import { moveFollower } from './util/follow-mouse';
 import { Keys } from '@common/config/keys';
 import { Helmet } from 'react-helmet';
 

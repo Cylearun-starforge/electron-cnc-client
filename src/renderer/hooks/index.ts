@@ -1,1 +1,1 @@
-export * from './useInjectCss';
+export * from './inject-css';

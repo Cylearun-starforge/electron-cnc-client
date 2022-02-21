@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './app';
 import { FollowMouseContext, FollowMouseElementInformation, GlobalStyleProvider } from '@renderer/contexts';
 const follower = [] as FollowMouseElementInformation[];
 
