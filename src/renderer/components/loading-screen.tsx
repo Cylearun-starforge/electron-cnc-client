@@ -1,7 +1,7 @@
 import { FC, ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { toBase64 } from '@common/utils';
-import { useGlobalStyle } from '@renderer/contexts';
+import { useStyle } from '@renderer/contexts';
 import { Runtime } from '@renderer/util/runtime';
 import { useInjectCss } from '@renderer/hooks';
 import { Keys } from '@common/config';
@@ -32,8 +32,8 @@ export const LoadingScreen: FC<{
 function useInit(switchToIndex: SwitchFunction) {
   const [background, setBg] = useState('');
   const [loading, setLoading] = useState<ReactNode>('loading');
-  const [, setStyles] = useGlobalStyle();
-  useInjectCss(setStyles, Runtime.currentTheme?.config?.main.styleSheets);
+  const [, { setGlobal }] = useStyle();
+  useInjectCss(setGlobal, Runtime.currentTheme?.config?.main.styleSheets);
 
   useEffect(() => {
     setLoadingScreenByConfig().then(config => {

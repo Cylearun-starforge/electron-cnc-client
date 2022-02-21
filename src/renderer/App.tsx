@@ -1,5 +1,5 @@
 import './app.css';
-import { useFollowMouse, useGlobalStyle } from '@renderer/contexts';
+import { useFollowMouse, useStyle } from '@renderer/contexts';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Index } from '@renderer/pages';
 import { useEffect } from 'react';
@@ -9,7 +9,7 @@ import { Helmet } from 'react-helmet';
 
 function App() {
   const follower = useFollowMouse();
-  const [cssContents] = useGlobalStyle();
+  const [{ global, page }] = useStyle();
 
   useEffect(() => {
     document.body.addEventListener('mousemove', e => {
@@ -28,7 +28,10 @@ function App() {
     <>
       <HashRouter>
         <Helmet>
-          {cssContents.map(css => (
+          {global.map(css => (
+            <style key={css}>{css}</style>
+          ))}
+          {page.map(css => (
             <style key={css}>{css}</style>
           ))}
         </Helmet>
