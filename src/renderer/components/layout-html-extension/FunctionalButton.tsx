@@ -1,5 +1,4 @@
-import { useTheme } from '@renderer/contexts';
-import { loadFile } from '@renderer/util/polyfill';
+import { Runtime } from '@renderer/util/runtime';
 import { ButtonHTMLAttributes, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 
@@ -16,7 +15,6 @@ export function FunctionalButton({ children, mask, link, className, ...props }: 
   const navigate = useNavigate();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const canvas = useRef(document.createElement('canvas'));
-  const [theme] = useTheme();
   const [hover, setHover] = useState(false);
 
   const onPixel = (x: number, y: number) => {
@@ -34,8 +32,7 @@ export function FunctionalButton({ children, mask, link, className, ...props }: 
         return;
       }
 
-      const path = await window.bridge.callMain('path-join', theme.path, mask);
-      const file = await loadFile(path);
+      const file = await Runtime.loadThemeFile(mask);
       const image = new Image();
       image.src = file;
       image.onload = () => {
@@ -56,7 +53,7 @@ export function FunctionalButton({ children, mask, link, className, ...props }: 
         console.log('canvas size', canvas.current.width, canvas.current.height);
       };
     })();
-  }, [theme, mask]);
+  }, [mask]);
 
   return (
     <button

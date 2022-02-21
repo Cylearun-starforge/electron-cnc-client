@@ -1,6 +1,8 @@
 import { ClientConfigurationType, Keys, ThemeConfigurationType, ThemeType } from '@common/config';
 import { DeepPartial } from '@common/utils';
 import type { ConfigConstType } from '@main/config/const';
+import { Polyfill } from './polyfill';
+const { callMain } = window.bridge;
 
 export class Runtime {
   static clientConfig: ClientConfigurationType;
@@ -11,9 +13,10 @@ export class Runtime {
   static constants: ConfigConstType;
   static ready: Promise<void> = new Promise(() => {});
   static themes: ThemeType[];
+  static polyfill = Polyfill;
 
   static async init() {
-    const fullConfig = await window.bridge.callMain('get-configuration');
+    const fullConfig = await callMain('get-configuration');
     Runtime.clientConfig = fullConfig.dynamic;
     Runtime.constants = fullConfig.constants;
     Runtime.themes = fullConfig.themes;
@@ -25,14 +28,19 @@ export class Runtime {
     if (!themePath) {
       return;
     }
-    const path = await window.bridge.callMain('path-join', themePath.path, Keys.themeConfiguration);
-    const themeConfig = await window.bridge.callMain('request-json-file', path);
+    const path = await callMain('path-join', themePath.path, Keys.themeConfiguration);
+    const themeConfig = await callMain('request-json-file', path);
     if (Runtime.validateTheme(themeConfig)) {
       Runtime.currentTheme = {
         ...themePath,
         config: themeConfig as ThemeConfigurationType,
       };
     }
+  }
+
+  static async loadThemeFile(path: string) {
+    const absolutePath = await callMain('path-join', Runtime.currentTheme.path, path);
+    return Runtime.polyfill.loadFile(absolutePath);
   }
 
   private static validateTheme(theme: unknown): boolean {

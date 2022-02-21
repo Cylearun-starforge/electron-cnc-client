@@ -1,9 +1,7 @@
-import { useTheme } from '@renderer/contexts';
+import { Runtime } from '@renderer/util/runtime';
 import { useEffect } from 'react';
 
 export function useInjectCss(setStyles?: (styles: string[]) => void, styleSheets?: string[]) {
-  const [theme] = useTheme();
-
   useEffect(() => {
     if (!setStyles) {
       return;
@@ -13,7 +11,7 @@ export function useInjectCss(setStyles?: (styles: string[]) => void, styleSheets
     }
 
     const cssPathPromises = styleSheets.map(async css => {
-      const path = await window.bridge.callMain('path-join', theme.path, css);
+      const path = await window.bridge.callMain('path-join', Runtime.currentTheme.path, css);
       return window.bridge.callMain('process-css', path);
     });
 
@@ -26,5 +24,5 @@ export function useInjectCss(setStyles?: (styles: string[]) => void, styleSheets
       });
       setStyles(newNodes);
     });
-  }, [theme, styleSheets, setStyles]);
+  }, [styleSheets, setStyles]);
 }
