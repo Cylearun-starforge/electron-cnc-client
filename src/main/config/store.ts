@@ -5,7 +5,7 @@ import { Keys } from '@common/config/keys';
 import { app, BrowserWindow, dialog } from 'electron';
 import { ClientConfigurationType, ThemeType } from '@common/config';
 
-const configPath = join(ConfigConst.ConfigDir, Keys.clientConfiguration);
+const configPath = join(ConfigConst.clientDir, Keys.clientConfiguration);
 
 export class ConfigStore {
   #config: ClientConfigurationType = {};
@@ -48,13 +48,13 @@ export class ConfigStore {
   async scanThemes() {
     this.themes = [];
 
-    const dir = await opendir(ConfigConst.ThemeDir);
+    const dir = await opendir(ConfigConst.themeDir);
     for await (const dirent of dir) {
       if (!dirent.isDirectory()) {
         continue;
       }
 
-      const dirAbsolutePath = join(ConfigConst.ThemeDir, dirent.name);
+      const dirAbsolutePath = join(ConfigConst.themeDir, dirent.name);
       const themeFiles = await readdir(dirAbsolutePath);
       if (themeFiles.includes(Keys.themeConfiguration)) {
         this.themes.push({

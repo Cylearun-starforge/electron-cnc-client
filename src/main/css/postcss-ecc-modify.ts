@@ -19,7 +19,7 @@ export const plugin: Plugin = {
         return;
       }
 
-      const fullPath = join(ConfigConst.ThemeDir, ConfigStore.Instance.config.defaultTheme ?? '', url);
+      const fullPath = join(ConfigConst.themeDir, ConfigStore.Instance.config.defaultTheme ?? '', url);
       if (process.env.NODE_ENV !== 'development') {
         // CSS only support '/'
         decl.value = `url(${fullPath.replace(/\\/g, '/')})`;

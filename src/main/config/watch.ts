@@ -3,7 +3,7 @@ import { ConfigConst } from '@main/config/const';
 import { Keys } from '@common/config/keys';
 import { watch, FileChangeInfo } from 'fs/promises';
 
-const configPath = join(ConfigConst.ConfigDir, Keys.clientConfiguration);
+const configPath = join(ConfigConst.clientDir, Keys.clientConfiguration);
 
 type WatchHandler = (info: FileChangeInfo<string>) => void;
 
