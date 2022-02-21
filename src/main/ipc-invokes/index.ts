@@ -8,6 +8,9 @@ import { exec } from 'child_process';
 import { processCss } from '@main/css/process';
 
 export const Invocable = {
+  'log-path': async (event: IpcMainInvokeEvent) => {
+    return join(ConfigConst.logDir, 'renderer.log');
+  },
   'request-local-file': async (event: IpcMainInvokeEvent, path: string) => {
     return readFile(path);
   },

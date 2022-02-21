@@ -13,6 +13,8 @@
     "electron": "^17.0.0"
   },
   "dependencies": {
-    "postcss": "^8.4.6"
+    "postcss": "^8.4.6",
+    "dayjs": "^1.10.7",
+    "electron-log": "^4.4.6"
   }
 }

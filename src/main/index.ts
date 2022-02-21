@@ -4,6 +4,7 @@ import { ConfigWatcher } from '@main/config/watch';
 import { Keys } from '@common/config/keys';
 import { MainWindow } from '@main/windows';
 import registerIpc from '@main/ipc-invokes';
+import { initLogger } from './logger';
 
 function createWindow() {
   const store = ConfigStore.Instance;
@@ -47,6 +48,7 @@ app.whenReady().then(async () => {
         console.log('An error occurred: ', err);
       });
   }
+  await initLogger();
   await loadConfig();
   createWindow();
   registerIpc();

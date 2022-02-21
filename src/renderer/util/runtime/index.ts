@@ -20,6 +20,7 @@ export class Runtime {
     Runtime.clientConfig = fullConfig.dynamic;
     Runtime.constants = fullConfig.constants;
     Runtime.themes = fullConfig.themes;
+    Runtime.overrideLog();
     Runtime.ready = Promise.resolve();
   }
 
@@ -73,5 +74,18 @@ export class Runtime {
 
     console.log(error);
     return false;
+  }
+
+  private static async overrideLog() {
+    const logger = window.bridge.logger;
+
+    const loggerFunctions = ['warn', 'info', 'debug', 'error', 'log'] as const;
+    loggerFunctions.forEach(level => {
+      const originalLogger = console[level] as (...data: any) => void;
+      console[level] = (...data: any) => {
+        originalLogger(...data);
+        logger[level](...data);
+      };
+    });
   }
 }
