@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { toBase64 } from '@common/utils';
 import { useStyle } from '@renderer/contexts';
 import { Runtime } from '@renderer/util/runtime';
-import { useInjectCss } from '@renderer/hooks';
+import { parseCss } from '@renderer/util/parse-css';
 import { Keys } from '@common/config';
 
 const { callMain } = window.bridge;
@@ -33,13 +33,16 @@ function useInit(switchToIndex: SwitchFunction) {
   const [background, setBg] = useState('');
   const [loading, setLoading] = useState<ReactNode>('loading');
   const [, { setGlobal }] = useStyle();
-  useInjectCss(setGlobal, Runtime.currentTheme?.config?.main.styleSheets);
 
   useEffect(() => {
-    setLoadingScreenByConfig().then(config => {
+    setLoadingScreenByConfig().then(async config => {
       setBg(config.backgroundUrl);
       if (config.loadingNode) {
         setLoading(config.loadingNode);
+      }
+      if (Runtime.currentTheme.config.styleSheets) {
+        const css = await parseCss(Runtime.currentTheme.config.styleSheets);
+        setGlobal(css);
       }
       switchToIndex();
     });
