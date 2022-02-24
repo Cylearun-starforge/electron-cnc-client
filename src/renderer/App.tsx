@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { moveFollower } from './util/follow-mouse';
 import { Keys } from '@common/config/keys';
 import { Helmet } from 'react-helmet';
+import { CampaignPage } from './pages/campaign';
 
 function App() {
   const follower = useFollowMouse();
@@ -37,6 +38,7 @@ function App() {
         </Helmet>
         <Routes>
           <Route path='/' element={<Index />} />
+          <Route path='/campaign' element={<CampaignPage />} />
         </Routes>
       </HashRouter>
     </>

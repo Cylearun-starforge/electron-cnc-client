@@ -9,5 +9,6 @@ export type Page = {
 
 export type ThemeConfigurationType = {
   main: Page;
+  campaign: Page;
   styleSheets?: string[];
 };
