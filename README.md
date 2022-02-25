@@ -41,3 +41,7 @@ There some Markdown document to help you getting started with electron-cnc-clien
 ## Build
 
 Just run `npm run pack:win`
+
+## Examples
+
+[`examples`](./examples/) folder provides some example on how to use electron-cnc-client to implement a DTA-like client UI.

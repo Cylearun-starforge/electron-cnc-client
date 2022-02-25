@@ -1,0 +1,67 @@
+* {
+  user-select: none;
+}
+
+.button-area {
+  top: 206px;
+  left: 15px;
+  width: 145px;
+}
+
+.live-count-area {
+  width: 100%;
+  text-align: center;
+  top: 70px;
+}
+
+.button {
+  margin: 8.5px 13px;
+  width: 118px;
+  height: 26px;
+  box-shadow: 0 0 0 2px black, 0 0 0 3px #944194, 0 0 0 6px black;
+  background: radial-gradient(ellipse at center, #8d3c8d 35%, black);
+  text-shadow: 1px 1px black;
+  font-size: 13.5px;
+}
+
+.button:hover {
+  transition: ease-in-out;
+  box-shadow: 0 0 0 2px black, 0 0 0 3px #992c04, 0 0 0 6px black;
+  background: radial-gradient(ellipse at center, #ffae00 30%, #992c04 75%, #751c04);
+}
+
+.version-link {
+  text-decoration: underline;
+  font-family: 'Arial';
+  font-size: 15px;
+  width: 100%;
+}
+
+.version-area {
+  height: 100%;
+}
+
+.version-area span {
+  margin: 5px;
+  font-size: 15px;
+}
+
+.version-label {
+  width: 64px;
+  height: 22px;
+}
+
+.extra-area {
+  bottom: 70px;
+  font-size: 18px;
+}
+
+.extra-area img {
+  margin: 4px;
+  opacity: 0.8;
+  transition-timing-function: linear;
+}
+
+.extra-area img:hover {
+  opacity: 1;
+}

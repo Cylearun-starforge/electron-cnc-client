@@ -1,0 +1,15 @@
+{
+  "defaultTheme": "MentalOmega",
+  "loading": {
+    "text": "Mental Omage client is loading",
+    "class": "loading-hint"
+  },
+  "defaultSize": {
+    "width": 1280,
+    "height": 800
+  },
+  "minimalSize": {
+    "width": 820,
+    "height": 650
+  }
+}

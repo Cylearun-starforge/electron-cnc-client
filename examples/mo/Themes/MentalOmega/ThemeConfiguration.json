@@ -1,0 +1,7 @@
+{
+  "styleSheets": ["tailwind.css"],
+  "main": {
+    "layout": "main.html",
+    "styleSheets": ["main.css"]
+  }
+}
