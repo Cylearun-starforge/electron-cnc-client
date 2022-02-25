@@ -5,7 +5,7 @@ These examples are also working in progress as the client itself has not finishe
 
 You should also aware that electron-cnc-client uses web technologies, which is different with DTA Client. Don't try to simulate DTA Client!
 
-For example, electron (and browsers) using [box models](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model), though you can still arrange elements using absolute positioning (specify `Location` field in DTA Client), using box models is a better approach is you want to write responsive UI.
+For example, electron (and browsers) using [box models](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model), though you can arrange elements using absolute positioning (like specify `Location` field in DTA Client), using box models is a better approach if you want to write responsive UI.
 
 I know HTML and CSS are difficult for some mod creators, that is the reason for these examples. Also, electron-cnc-client supports shared CSS files, intends to share styles between pages and modals. You can also use a CSS framework to develop your UI.
 
