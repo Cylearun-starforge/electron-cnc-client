@@ -45,3 +45,7 @@ Just run `npm run pack:win`
 ## Examples
 
 [`examples`](./examples/) folder provides some example on how to use electron-cnc-client to implement a DTA-like client UI.
+
+Because electron-cnc-client's wording directory is set to `node_modules/.electron-run/app`,
+we provide an environment variable `CC_CLIENT_CONFIG` to redirect working directory.
+Run `$env:CC_CLIENT_CONFIG='../../../examples/mo'` to set working directory to Mental Omega example, then run `npm run dev` launch client.
