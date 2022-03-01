@@ -8,7 +8,7 @@ export type Page = {
 };
 
 export type ThemeConfigurationType = {
-  main: Page;
-  campaign: Page;
+  index: Page;
+  pages: Record<string, Page>;
   styleSheets?: string[];
 };

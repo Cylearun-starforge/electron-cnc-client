@@ -7,18 +7,13 @@ import { useStyle } from '@renderer/contexts';
 
 const { callMain } = window.bridge;
 
-function useParseLayout() {
+function useParseLayout(layout: string, styleSheets: string[]) {
   const [node, setNode] = useState<ReactNode>();
-  const config = Runtime.currentTheme?.config ?? null;
   const [, { setPage }] = useStyle();
   useEffect(() => {
     (async () => {
-      if (!config) {
-        return;
-      }
-      const campaignStyle = parseCss(config.campaign.styleSheets ?? []);
-      const campaignLayout = config.campaign.layout;
-      const campaignPath = await callMain('path-join', Runtime.currentTheme.path, campaignLayout);
+      const campaignStyle = parseCss(styleSheets);
+      const campaignPath = await callMain('path-join', Runtime.currentTheme.path, layout);
       const buffer = await callMain('request-local-file', campaignPath);
       const decoder = new TextDecoder();
 
@@ -27,11 +22,16 @@ function useParseLayout() {
       setPage(css);
       setNode(htmlNode);
     })();
-  }, [config]);
+  }, []);
   return node;
 }
 
-export const CampaignPage: FC = () => {
-  const node = useParseLayout();
+type PageProps = {
+  layout: string;
+  styleSheets?: string[];
+};
+
+export const PageContainer: FC<PageProps> = ({ layout, styleSheets }) => {
+  const node = useParseLayout(layout, styleSheets ?? []);
   return <FullScreen>{node}</FullScreen>;
 };

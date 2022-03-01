@@ -16,8 +16,8 @@ function useParseLayout() {
       if (!config) {
         return;
       }
-      const mainStyle = parseCss(config.main.styleSheets ?? []);
-      const mainLayout = config.main.layout;
+      const mainStyle = parseCss(config.index.styleSheets ?? []);
+      const mainLayout = config.index.layout;
       const mainPath = await callMain('path-join', Runtime.currentTheme.path, mainLayout);
       const mainBuffer = await callMain('request-local-file', mainPath);
       const decoder = new TextDecoder();

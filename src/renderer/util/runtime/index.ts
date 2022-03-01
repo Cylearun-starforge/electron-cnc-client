@@ -11,6 +11,8 @@ export class Runtime {
     config: ThemeConfigurationType;
   };
 
+  static event: EventTarget = new EventTarget();
+
   static modals: ModalManager = new ModalManager();
   static constants: ConfigConstType;
   static ready: Promise<void> = new Promise(() => {});
@@ -38,6 +40,7 @@ export class Runtime {
         ...themePath,
         config: themeConfig as ThemeConfigurationType,
       };
+      Runtime.event.dispatchEvent(new Event('theme-loaded'));
     }
   }
 
@@ -51,15 +54,15 @@ export class Runtime {
     const missing = [] as string[];
     const invalid = [] as string[];
 
-    if (!themeConfig.main) {
+    if (!themeConfig.index) {
       missing.push('pages');
     } else {
       const pageMissing = [] as string[];
-      if (!themeConfig.main.layout) {
+      if (!themeConfig.index.layout) {
         pageMissing.push('layout');
       }
       if (pageMissing.length) {
-        invalid.push(`missing field ${pageMissing.join(', ')} in page main`);
+        invalid.push(`missing field ${pageMissing.join(', ')} in page index`);
       }
     }
     if (missing.length === 0 && invalid.length === 0) {
