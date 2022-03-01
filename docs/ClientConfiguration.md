@@ -1,6 +1,6 @@
 # ClientConfiguration Reference
 
-ClientConfiguration file is usually named as `ClientConfiguration.json`, and placed in root directory of client. It use JSON format, provide ability to custom client's UI.
+ClientConfiguration file is named as `ClientConfiguration.json`, and placed in root directory of client. It use JSON format, provide ability to custom client's UI.
 
 **Warn**: Although most settings are optional or complementary, you should specify on least 1 of them, otherwise you will get a white screen without any fallback.
 

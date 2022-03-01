@@ -37,6 +37,7 @@ There some Markdown document to help you getting started with electron-cnc-clien
 
 1. [ClientConfiguration Reference](/docs/ClientConfiguration.md)
 2. [Layout HTML Reference](/docs/LayoutHTML.md)
+3. [ThemeConfiguration Reference](/docs/ThemeConfiguration.md)
 
 ## Build
 

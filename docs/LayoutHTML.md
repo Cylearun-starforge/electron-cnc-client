@@ -59,10 +59,16 @@ Specify the functionality you want.
 | external-link | Open `link` in explorer or browser | Using explorer or browser depends on you link protocol. You should also specify `link` |
 | client-link   | Navigate to other client page      | You should also specify `link`                                                         |
 | close-app     | Close client                       |                                                                                        |
+| open-modal    | Open `modal`                       | Open a modal defined by `modal-page`                                                   |
+| close-modal   | Close current opened modal         |                                                                                        |
 
 #### property: `link`
 
 The link to navigate.
+
+#### property: `modal`
+
+The modal to open.
 
 #### property: `mask`
 
@@ -88,3 +94,16 @@ Variable's name
 | username  | username             |               |
 | theme     | Theme name           |               |
 | themePath | Path to theme folder | Absolute path |
+
+### modal-page
+
+A portal element used to host a modal. It accepts a `modal-id` to identify different modals. After defined a modal,
+use `functional-button` with `func-type="open-modal" modal="<your-modal-name>"` to open your modal,
+and use `func-type="close-modal"` to close a modal.
+
+Modal is semantically belongs to page, and it shared the same style sheets with page. When navigated to another page, modals are also destroyed with old page.
+Though you can use modal to host another page, but a separated page is a better way.
+
+#### property: `modal-id`
+
+A string used to identify modal.
