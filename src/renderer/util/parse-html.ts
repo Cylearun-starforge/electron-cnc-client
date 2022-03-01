@@ -3,11 +3,18 @@ import { unified } from 'unified';
 import rehypeParse from 'rehype-parse';
 import rehypeReact from 'rehype-react';
 import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
-import { Image, Slider, FollowMouse, FunctionalButton, VariableText } from '@renderer/components/layout-html-extension';
+import {
+  Image,
+  Slider,
+  FollowMouse,
+  FunctionalButton,
+  VariableText,
+  ModalPage,
+} from '@renderer/components/layout-html-extension';
 
 const schema = Object.assign({}, defaultSchema);
 schema.attributes!['*'].push('style', 'className');
-schema.tagNames!.push('carousel-swiper', 'follow-mouse', 'functional-button', 'var-text');
+schema.tagNames!.push('carousel-swiper', 'follow-mouse', 'functional-button', 'var-text', 'modal-page');
 schema.attributes!['carousel-swiper'] = ['mask'];
 schema.attributes!['follow-mouse'] = [
   'z-index',
@@ -22,8 +29,9 @@ schema.attributes!['follow-mouse'] = [
   'max-move-left',
   'max-move-right',
 ];
-schema.attributes!['functional-button'] = ['func-type', 'link', 'class', 'mask', 'hover-class'];
+schema.attributes!['functional-button'] = ['func-type', 'link', 'class', 'mask', 'hover-class', 'modal'];
 schema.attributes!['var-text'] = ['var'];
+schema.attributes!['modal-page'] = ['modal-id']
 schema.tagNames = schema.tagNames?.filter(t => t !== 'title');
 
 const processor = unified()
@@ -38,6 +46,7 @@ const processor = unified()
       'carousel-swiper': Slider,
       'functional-button': FunctionalButton,
       'var-text': VariableText,
+      'modal-page': ModalPage,
     } as any,
   });
 

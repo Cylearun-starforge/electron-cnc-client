@@ -1,6 +1,7 @@
 import { ClientConfigurationType, Keys, ThemeConfigurationType, ThemeType } from '@common/config';
 import { DeepPartial } from '@common/utils';
 import type { ConfigConstType } from '@main/config/const';
+import { ModalManager } from './modal';
 import { Polyfill } from './polyfill';
 const { callMain } = window.bridge;
 
@@ -10,6 +11,7 @@ export class Runtime {
     config: ThemeConfigurationType;
   };
 
+  static modals: ModalManager = new ModalManager();
   static constants: ConfigConstType;
   static ready: Promise<void> = new Promise(() => {});
   static themes: ThemeType[];

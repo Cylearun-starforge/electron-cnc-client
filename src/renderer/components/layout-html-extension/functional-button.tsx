@@ -2,13 +2,14 @@ import { Runtime } from '@renderer/util/runtime';
 import { ButtonHTMLAttributes, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 
-export type FunctionalityType = 'external-link' | 'client-link' | 'close-app';
+export type FunctionalityType = 'external-link' | 'client-link' | 'close-app' | 'open-modal' | 'close-modal';
 
 export type FunctionalButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   ['func-type']?: FunctionalityType;
   ['hover-class']?: string;
   className?: string;
   link?: string;
+  modal?: string;
   mask?: string;
 };
 export function FunctionalButton({ children, mask, link, className, ...props }: FunctionalButtonProps) {
@@ -79,14 +80,23 @@ export function FunctionalButton({ children, mask, link, className, ...props }: 
           window.bridge.callMain('close-app');
           return;
         }
-        if (!link) {
-          return;
-        }
-        if (props['func-type'] === 'external-link') {
+        if (funcType === 'external-link' && link) {
           window.bridge.callMain('open-in-explorer', link);
           return;
         }
-        navigate(link);
+        if (funcType === 'client-link' && link) {
+          navigate(link);
+          return;
+        }
+        if (funcType === 'close-modal') {
+          Runtime.modals.close();
+          return;
+        }
+        if (funcType === 'open-modal' && props.modal) {
+          Runtime.modals.open(props.modal);
+          console.log('call open');
+
+        }
       }}
     >
       {children}

@@ -3,3 +3,4 @@ export * from './img';
 export * from './functional-button';
 export * from './slider';
 export * from './variable-text';
+export * from './modal-page';

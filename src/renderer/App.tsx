@@ -7,6 +7,7 @@ import { moveFollower } from './util/follow-mouse';
 import { Keys } from '@common/config/keys';
 import { Helmet } from 'react-helmet';
 import { CampaignPage } from './pages/campaign';
+import { ModalHost } from '@renderer/components';
 
 function App() {
   const follower = useFollowMouse();
@@ -36,6 +37,7 @@ function App() {
             <style key={css}>{css}</style>
           ))}
         </Helmet>
+        <ModalHost />
         <Routes>
           <Route path='/' element={<Index />} />
           <Route path='/campaign' element={<CampaignPage />} />
