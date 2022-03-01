@@ -53,10 +53,10 @@ export function FollowMouse({ children, ...props }: FollowMouseProps) {
       y: BaseY.includes(baseY as any) ? (baseY as any) : 'top',
     },
     maxMove: {
-      bottom: parseAndCheck(props['max-move-bottom'], 0),
-      top: parseAndCheck(props['max-move-top'], 0),
-      left: parseAndCheck(props['max-move-left'], 0),
-      right: parseAndCheck(props['max-move-right'], 0),
+      bottom: parseAndCheck(props['max-move-bottom'], Infinity),
+      top: parseAndCheck(props['max-move-top'], Infinity),
+      left: parseAndCheck(props['max-move-left'], Infinity),
+      right: parseAndCheck(props['max-move-right'], Infinity),
     },
     offset: {
       x: parseAndCheck(props['offset-x'], 0),
