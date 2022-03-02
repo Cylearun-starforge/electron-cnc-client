@@ -1,0 +1,81 @@
+.mission-list {
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.mission-banner {
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+
+.mission-list::-webkit-scrollbar {
+  background: rgb(37, 37, 37);
+}
+
+.mission-list::-webkit-scrollbar-button {
+  width: 16px;
+  height: 24px;
+  background-image: url(./scrollbar-button.png);
+}
+
+.mission-list::-webkit-scrollbar-button:first-of-type {
+  background-image: url(./scrollbar-button-up.png);
+}
+
+.mission-list::-webkit-scrollbar-thumb {
+  border-left: 1px solid #9c419c;
+  border-right: 1px solid #9c419c;
+  background: linear-gradient(90deg, black 5%, white 50%, black 95%);
+}
+
+.mission-list > li {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.mission-list > .selected {
+  background-color: rgba(149, 65, 149, 0.8);
+}
+
+.mission-list > .allies::before {
+  margin-left: 4px;
+  content: url(./icons/Allies.png);
+}
+
+.mission-list > .soviets::before {
+  margin-left: 4px;
+  content: url(./icons/Soviets.png);
+}
+
+.mission-desc {
+  height: 50%;
+  border: 1px solid white;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+}
+
+.difficulty-button {
+  height: 50px;
+}
+
+.difficulty-button-active {
+  background-image: url(./difficulty-active.png);
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.button {
+  margin: 8.5px 13px;
+  box-shadow: 0 0 0 2px black, 0 0 0 3px #944194, 0 0 0 6px black;
+  background: radial-gradient(ellipse at center, #8d3c8d 35%, black);
+  text-shadow: 1px 1px black;
+  font-size: 13.5px;
+}
+
+.button:hover {
+  transition: ease-in-out;
+  box-shadow: 0 0 0 2px black, 0 0 0 3px #992c04, 0 0 0 6px black;
+  background: radial-gradient(ellipse at center, #ffae00 30%, #992c04 75%, #751c04);
+}

@@ -1,7 +1,13 @@
 {
   "styleSheets": ["tailwind.css"],
-  "main": {
+  "index": {
     "layout": "main.html",
     "styleSheets": ["main.css"]
+  },
+  "pages": {
+    "campaign": {
+      "layout": "campaign.html",
+      "styleSheets": ["campaign.css"]
+    }
   }
 }
