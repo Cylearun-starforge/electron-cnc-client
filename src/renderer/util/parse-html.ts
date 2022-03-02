@@ -31,8 +31,9 @@ schema.attributes!['follow-mouse'] = [
 ];
 schema.attributes!['functional-button'] = ['func-type', 'link', 'class', 'mask', 'hover-class', 'modal'];
 schema.attributes!['var-text'] = ['var'];
-schema.attributes!['modal-page'] = ['modal-id']
+schema.attributes!['modal-page'] = ['modal-id'];
 schema.tagNames = schema.tagNames?.filter(t => t !== 'title');
+schema.attributes!.li = ['class'];
 
 const processor = unified()
   .use(rehypeParse, { fragment: true })
