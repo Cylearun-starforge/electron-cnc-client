@@ -12,13 +12,13 @@ function useParseLayout(layout: string, styleSheets: string[]) {
   const [, { setPage }] = useStyle();
   useEffect(() => {
     (async () => {
-      const campaignStyle = parseCss(styleSheets);
-      const campaignPath = await callMain('path-join', Runtime.currentTheme.path, layout);
-      const buffer = await callMain('request-local-file', campaignPath);
+      const pageStylePromise = parseCss(styleSheets);
+      const layoutPath = await callMain('path-join', Runtime.currentTheme.path, layout);
+      const buffer = await callMain('request-local-file', layoutPath);
       const decoder = new TextDecoder();
 
       const htmlNode = await parseHtml(decoder.decode(buffer));
-      const css = await campaignStyle;
+      const css = await pageStylePromise;
       setPage(css);
       setNode(htmlNode);
     })();
