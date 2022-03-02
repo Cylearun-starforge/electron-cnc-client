@@ -55,7 +55,7 @@ export class Runtime {
     const invalid = [] as string[];
 
     if (!themeConfig.index) {
-      missing.push('pages');
+      missing.push('index');
     } else {
       const pageMissing = [] as string[];
       if (!themeConfig.index.layout) {
